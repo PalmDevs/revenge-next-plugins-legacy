@@ -358,7 +358,7 @@ function buildEmojiString(emoji: BasicEmoji) {
 }
 
 function buildEmojiUrl(emoji: BasicEmoji, size: number) {
-    return `https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? 'gif' : 'webp'}?size=${size}&name=${encodeURIComponent(emoji.name)}`
+    return `https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=${size}&name=${encodeURIComponent(emoji.name)}${emoji.animated ? '&animated=true' : ''}`
 }
 
 function buildStickerUrl(sticker: BasicSticker, size: number) {
