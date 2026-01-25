@@ -1,10 +1,4 @@
-import "../../callback-DNr1bYVq.js";
-import "../../error-DWG2BlZz.js";
-import "../../types-Q9nY_LVo.js";
-import "../../promise-Du5Pcai3.js";
-import "../../proxy-KNbRcH7H.js";
-import "../../react-navigation-BsoHQk3U.js";
-import { c as DiscordNativeModules } from "../../native-BXtyFZ8I.js";
-import { n as PluginApiDiscord, t as DiscordModules } from "../../index-CphpZo9T.js";
-import "../../main_tabs_v2-DHNkP9c9.js";
-export { DiscordModules, DiscordNativeModules, PluginApiDiscord };
+import "../../react-navigation-B-L1yoaO.js";
+import { t as DiscordNativeModules } from "../../native-B7ez-sGx.js";
+import { t as DiscordModules } from "../../index-NLeEsMBb.js";
+export { DiscordModules, DiscordNativeModules };

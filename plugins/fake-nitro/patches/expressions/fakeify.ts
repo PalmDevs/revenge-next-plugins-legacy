@@ -41,9 +41,13 @@ function patchEmojiPicker({
     cleanup,
     plugin,
     unscoped: {
+        discord: {
+            utils: {
+                finders: { lookupModuleWithImportedPath },
+            },
+        },
         modules: {
             finders: {
-                lookupModuleWithImportedPath,
                 getModules,
                 filters: { withProps },
             },

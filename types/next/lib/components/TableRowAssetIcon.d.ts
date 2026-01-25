@@ -1,11 +1,15 @@
-import "../../callback-DNr1bYVq.js";
-import "../../error-DWG2BlZz.js";
-import "../../types-Q9nY_LVo.js";
-import "../../promise-Du5Pcai3.js";
-import "../../proxy-KNbRcH7H.js";
-import "../../react-navigation-BsoHQk3U.js";
-import "../../native-BXtyFZ8I.js";
-import "../../index-CphpZo9T.js";
-import "../../main_tabs_v2-DHNkP9c9.js";
-import { n as TableRowAssetIconProps, t as TableRowAssetIcon } from "../../TableRowAssetIcon-B7pGEuVI.js";
+import "../../react-navigation-B-L1yoaO.js";
+import { t as DiscordModules } from "../../index-NLeEsMBb.js";
+import * as react2 from "react";
+
+//#region lib/components/src/TableRowAssetIcon.d.ts
+declare function TableRowAssetIcon(props: TableRowAssetIconProps): react2.JSX.Element;
+type TableRowAssetIconProps = Omit<DiscordModules.Components.TableRowIconProps, 'source'> & ({
+  name: string;
+  id?: never;
+} | {
+  name?: never;
+  id: number;
+});
+//#endregion
 export { TableRowAssetIconProps, TableRowAssetIcon as default };

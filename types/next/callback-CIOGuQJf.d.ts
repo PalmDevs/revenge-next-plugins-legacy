@@ -1,6 +1,3 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-
-//#region lib/utils/src/callback.d.ts
 declare namespace callback_d_exports {
   export { asap, debounce, noop };
 }

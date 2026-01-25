@@ -1,9 +1,5 @@
-import "../../callback-DNr1bYVq.js";
-import "../../error-DWG2BlZz.js";
-import { i as AnyObject } from "../../types-Q9nY_LVo.js";
-import "../../promise-Du5Pcai3.js";
-import "../../proxy-KNbRcH7H.js";
-import { c as index_d_exports, r as StorageOptions, t as Storage } from "../../index-CdcgEdm1.js";
+import { i as AnyObject } from "../../types-Ct0e6YQc.js";
+import { Storage, StorageOptions, t as index_d_exports } from "../storage.js";
 
 //#region lib/storage/src/types.d.ts
 declare module '@revenge-mod/plugins/types' {
@@ -18,8 +14,8 @@ declare module '@revenge-mod/plugins/types' {
   }
   interface InitPluginApi<O extends PluginApiExtensionsOptions> {
     /**
-     * The plugin storage.
-     */
+             * The plugin storage.
+             */
     storage: Storage<NonNullable<O['storage']>>;
   }
 }

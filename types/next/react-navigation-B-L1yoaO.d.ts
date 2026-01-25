@@ -1,4 +1,3 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
 import * as _react_navigation_stack0 from "@react-navigation/stack";
 import * as _react_navigation_native0 from "@react-navigation/native";
 

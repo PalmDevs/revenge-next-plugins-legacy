@@ -1,11 +1,11 @@
-import "../../callback-DNr1bYVq.js";
-import "../../error-DWG2BlZz.js";
-import "../../types-Q9nY_LVo.js";
-import "../../promise-Du5Pcai3.js";
-import "../../proxy-KNbRcH7H.js";
-import "../../react-navigation-BsoHQk3U.js";
-import "../../native-BXtyFZ8I.js";
-import "../../index-CphpZo9T.js";
-import "../../main_tabs_v2-DHNkP9c9.js";
-import { t as FormSwitch } from "../../FormSwitch-yqH-Y-17.js";
+import "../../react-navigation-B-L1yoaO.js";
+import { t as DiscordModules } from "../../index-NLeEsMBb.js";
+import * as react0 from "react";
+
+//#region lib/components/src/FormSwitch.d.ts
+/**
+ * A switch component that is styled to match Discord's configuration
+ */
+declare function FormSwitch(props: DiscordModules.Components.FormSwitchProps): react0.JSX.Element;
+//#endregion
 export { FormSwitch as default };

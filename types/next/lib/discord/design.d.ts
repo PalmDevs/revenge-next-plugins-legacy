@@ -1,10 +1,41 @@
-import "../../callback-DNr1bYVq.js";
-import "../../error-DWG2BlZz.js";
-import "../../types-Q9nY_LVo.js";
-import "../../promise-Du5Pcai3.js";
-import "../../proxy-KNbRcH7H.js";
-import "../../react-navigation-BsoHQk3U.js";
-import "../../native-BXtyFZ8I.js";
-import { S as FormSwitch, x as Design } from "../../index-CphpZo9T.js";
-import "../../main_tabs_v2-DHNkP9c9.js";
-export { Design, FormSwitch };
+import "../../react-navigation-B-L1yoaO.js";
+import { t as DiscordModules } from "../../index-NLeEsMBb.js";
+
+//#region lib/discord/src/design.d.ts
+declare namespace design_d_exports {
+  export { Design, FormSwitch };
+}
+declare let Design: Design;
+declare let FormSwitch: DiscordModules.Components.FormSwitch;
+interface Design {
+  createStyles: DiscordModules.Components.Styles.CreateStylesFunction;
+  useTooltip: DiscordModules.Components.UseTooltipFunction;
+  ActionSheet: DiscordModules.Components.ActionSheet;
+  ActionSheetRow: DiscordModules.Components.ActionSheetRow;
+  ActionSheetSwitchRow: DiscordModules.Components.ActionSheetSwitchRow;
+  BottomSheetTitleHeader: DiscordModules.Components.BottomSheetTitleHeader;
+  AlertActionButton: DiscordModules.Components.AlertActionButton;
+  AlertModal: DiscordModules.Components.AlertModal;
+  Button: DiscordModules.Components.Button;
+  Card: DiscordModules.Components.Card;
+  ContextMenu: DiscordModules.Components.ContextMenu;
+  ContextMenuItem: DiscordModules.Components.ContextMenuItem;
+  IconButton: DiscordModules.Components.IconButton;
+  ImageButton: DiscordModules.Components.ImageButton;
+  LayerScope: DiscordModules.Components.LayerScope;
+  NavigatorHeader: DiscordModules.Components.NavigatorHeader;
+  Stack: DiscordModules.Components.Stack;
+  Slider: DiscordModules.Components.Slider;
+  TableCheckboxRow: DiscordModules.Components.TableCheckboxRow;
+  TableRadioGroup: typeof DiscordModules.Components.TableRadioGroup;
+  TableRadioRow: typeof DiscordModules.Components.TableRadioRow;
+  TableRow: DiscordModules.Components.TableRow;
+  TableRowGroup: DiscordModules.Components.TableRowGroup;
+  TableSwitchRow: DiscordModules.Components.TableSwitchRow;
+  Text: DiscordModules.Components.Text;
+  TextArea: DiscordModules.Components.TextArea;
+  TextField: DiscordModules.Components.TextField;
+  TextInput: DiscordModules.Components.TextInput;
+}
+//#endregion
+export { Design, FormSwitch, design_d_exports as t };

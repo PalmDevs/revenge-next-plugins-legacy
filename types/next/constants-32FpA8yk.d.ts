@@ -1,6 +1,3 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-
-//#region lib/plugins/src/constants.d.ts
 declare namespace constants_d_exports {
   export { PersistentPluginFlags, PluginFlags, PluginStatus, PluginsStorageDirectory };
 }
@@ -9,21 +6,21 @@ declare namespace constants_d_exports {
  */
 declare const PluginFlags: {
   /**
-   * The plugin is enabled.
-   */
+       * The plugin is enabled.
+       */
   Enabled: number;
   /**
-   * The plugin requires a reload to apply changes.
-   */
+       * The plugin requires a reload to apply changes.
+       */
   ReloadRequired: number;
   /**
-   * The plugin has errors.
-   */
+       * The plugin has errors.
+       */
   Errored: number;
   /**
-   * The plugin was enabled after the app was started.
-   * This is usually caused by a newly installed plugin, or a plugin that was re-enabled.
-   */
+       * The plugin was enabled after the app was started.
+       * This is usually caused by a newly installed plugin, or a plugin that was re-enabled.
+       */
   EnabledLate: number;
 };
 /**

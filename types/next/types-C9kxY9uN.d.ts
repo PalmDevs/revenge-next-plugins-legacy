@@ -1,60 +1,28 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-import { x as index_d_exports$3 } from "./types-Q9nY_LVo.js";
-import { a as utils_d_exports, l as index_d_exports$4 } from "./utils-DVo51UEA.js";
-import { t as index_d_exports$2 } from "./index-CEFhTJtd.js";
-import { u as index_d_exports$5 } from "./index-8QuIENve.js";
-import { a as constants_d_exports } from "./constants-Du6Y7hwa.js";
-import { s as index_d_exports } from "./index-s2zcKmcl.js";
-import { t as index_d_exports$1 } from "./index-Di-Mayfc.js";
+import { x as index_d_exports } from "./types-Ct0e6YQc.js";
+import { a as utils_d_exports, c as index_d_exports$1 } from "./utils-DXrVt5U8.js";
+import { t as index_d_exports$2 } from "./index-CrguKj0G.js";
+import { i as fs_d_exports } from "./fs-DJKLNjzi.js";
+import { u as index_d_exports$3 } from "./index-BVQDJlXf.js";
+import { a as constants_d_exports } from "./constants-32FpA8yk.js";
+import { s as index_d_exports$4 } from "./index-BTYR7jr_.js";
+import { t as index_d_exports$5 } from "./index-CDE2ZC1T.js";
 import { FunctionComponent } from "react";
 import * as _revenge_mod_patcher0 from "@revenge-mod/patcher";
 import * as _revenge_mod_assets0 from "@revenge-mod/assets";
 import * as PluginApiReact_ from "@revenge-mod/react";
 
-//#region lib/modules/src/native/fs.d.ts
-declare namespace fs_d_exports {
-  export { deleteFileSync, exists, existsSync, getConstants, readFile, readFileSync, rm, rmSync, writeFile, writeFileSync };
-}
-declare function readFile(path: string): Promise<string>;
-declare function writeFile(path: string, data: string): Promise<void>;
-declare function exists(path: string): Promise<boolean>;
-declare function rm(path: string): Promise<boolean>;
-declare function existsSync(path: string): boolean;
-declare function readFileSync(path: string): string;
-declare function writeFileSync(path: string, data: string): void;
-declare function rmSync(path: string): boolean;
-declare function deleteFileSync(path: string): boolean;
-declare function getConstants(): {
-  data: string;
-  files: string;
-  cache: string;
-};
-declare module '@revenge-mod/modules/native' {
-  interface Methods {
-    'revenge.fs.getConstants': [[], {
-      data: string;
-      files: string;
-      cache: string;
-    }];
-    'revenge.fs.read': [[path: string], string];
-    'revenge.fs.write': [[path: string, data: string], void];
-    'revenge.fs.exists': [[path: string], boolean];
-    'revenge.fs.delete': [[path: string], boolean];
-  }
-}
-//#endregion
 //#region lib/plugins/src/apis/modules.d.ts
 interface PluginApiModules {
   finders: PluginApiModulesFinders;
   metro: PluginApiModulesMetro;
   native: PluginApiModulesNative;
 }
-type PluginApiModulesNative = typeof index_d_exports$5 & {
+type PluginApiModulesNative = typeof index_d_exports$3 & {
   fs: typeof fs_d_exports;
 };
-type PluginApiModulesMetro = typeof utils_d_exports & typeof index_d_exports$4;
+type PluginApiModulesMetro = typeof utils_d_exports & typeof index_d_exports$1;
 type PluginApiModulesFinders = typeof index_d_exports$2 & {
-  filters: typeof index_d_exports$3;
+  filters: typeof index_d_exports;
 };
 //#endregion
 //#region lib/plugins/src/apis/plugins.d.ts
@@ -64,8 +32,8 @@ interface PluginApiPlugins {
 //#endregion
 //#region lib/plugins/src/apis/react.d.ts
 type PluginApiReact = typeof PluginApiReact_ & {
-  jsxRuntime: typeof index_d_exports;
-  native: typeof index_d_exports$1;
+  jsxRuntime: typeof index_d_exports$4;
+  native: typeof index_d_exports$5;
 };
 //#endregion
 //#region lib/plugins/src/types.d.ts
@@ -170,34 +138,34 @@ interface PluginApi<O extends PluginApiExtensionsOptions = PluginApiExtensionsOp
  */
 interface PluginManifest {
   /**
-   * The unique identifier for the plugin.
-   */
+       * The unique identifier for the plugin.
+       */
   id: string;
   /**
-   * The name of the plugin.
-   */
+       * The name of the plugin.
+       */
   name: string;
   /**
-   * The author of the plugin.
-   */
+       * The author of the plugin.
+       */
   author: string;
   /**
-   * The description of the plugin.
-   */
+       * The description of the plugin.
+       */
   description: string;
   /**
-   * The icon of the plugin.
-   */
+       * The icon of the plugin.
+       */
   icon?: string;
   /**
-   * The dependencies of the plugin.
-   */
+       * The dependencies of the plugin.
+       */
   dependencies?: PluginDependency[];
 }
 interface PluginDependency {
   /**
-   * The ID of this dependency.
-   */
+       * The ID of this dependency.
+       */
   id: string;
 }
 interface PluginOptions<O extends PluginApiExtensionsOptions = PluginApiExtensionsOptions> extends PluginLifecycles<O> {
@@ -208,62 +176,62 @@ interface PluginOptions<O extends PluginApiExtensionsOptions = PluginApiExtensio
  */
 interface PluginLifecycles<O extends PluginApiExtensionsOptions = PluginApiExtensionsOptions> {
   /**
-   * Runs as soon as possible with very limited APIs.
-   * Before the index module (module 0)'s factory is run.
-   *
-   * @param api Plugin API (very limited).
-   */
+       * Runs as soon as possible with very limited APIs.
+       * Before the index module (module 0)'s factory is run.
+       *
+       * @param api Plugin API (very limited).
+       */
   preInit?: (this: Plugin<O, 'PreInit'>, api: PreInitPluginApi<O>) => any;
   /**
-   * Runs as soon as all important modules are initialized.
-   * After the index module (module 0)'s factory is run.
-   *
-   * @param api Plugin API (limited).
-   */
+       * Runs as soon as all important modules are initialized.
+       * After the index module (module 0)'s factory is run.
+       *
+       * @param api Plugin API (limited).
+       */
   init?: (this: Plugin<O, 'Init'>, api: InitPluginApi<O>) => any;
   /**
-   * Runs when the plugin can be started with all APIs available.
-   *
-   * @param api Plugin API.
-   */
+       * Runs when the plugin can be started with all APIs available.
+       *
+       * @param api Plugin API.
+       */
   start?: (this: Plugin<O, 'Start'>, api: PluginApi<O>) => any;
   /**
-   * Runs when the plugin is stopped.
-   *
-   * @param api Plugin API.
-   */
+       * Runs when the plugin is stopped.
+       *
+       * @param api Plugin API.
+       */
   stop?: (this: Plugin<O, 'Start'>, api: PluginApi<O>) => any;
 }
 interface Plugin<O extends PluginApiExtensionsOptions = PluginApiExtensionsOptions, S extends keyof PluginApiInLifecycleMap<O> = keyof PluginApiInLifecycleMap<O>> {
   manifest: PluginManifest;
   lifecycles: PluginLifecycles<O>;
   /**
-   * @see {@link PluginFlags}
-   */
+       * @see {@link PluginFlags}
+       */
   flags: number;
   /**
-   * @see {@link PluginStatus}
-   */
+       * @see {@link PluginStatus}
+       */
   status: number;
   /**
-   * Errors encountered during the plugin lifecycles.
-   */
+       * Errors encountered during the plugin lifecycles.
+       */
   errors: unknown[];
   SettingsComponent?: PluginSettingsComponent<O>;
   /**
-   * Disable the plugin.
-   * This will also stop the plugin if it is running.
-   */
+       * Disable the plugin.
+       * This will also stop the plugin if it is running.
+       */
   disable(this: Plugin<O, S>): Promise<void>;
   /**
-   * Stop the plugin.
-   */
+       * Stop the plugin.
+       */
   stop(this: Plugin<O, S>): Promise<void>;
   /**
-   * The plugin API.
-   *
-   * Not recommended to use this directly.
-   */
+       * The plugin API.
+       *
+       * Not recommended to use this directly.
+       */
   api: PluginApiInLifecycleMap<O>[S];
 }
 /**

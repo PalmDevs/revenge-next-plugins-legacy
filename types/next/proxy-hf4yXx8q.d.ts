@@ -1,6 +1,3 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-
-//#region lib/utils/src/proxy.d.ts
 declare namespace proxy_d_exports {
   export { DestructureOptions, DestructureResult, ProxifyOptions, destructure, getProxyTarget, isProxified, isProxy, proxify, unproxify };
 }
@@ -29,21 +26,21 @@ declare function isProxified(obj: object): boolean;
 declare function getProxyTarget(obj: object): object | undefined;
 interface ProxifyOptions {
   /**
-   * The hint for the proxified value.
-   *
-   * @default function () {}
-   */
+       * The hint for the proxified value.
+       *
+       * @default function () {}
+       */
   hint?: object;
   /**
-   * Whether the proxified value should be cached.
-   */
+       * Whether the proxified value should be cached.
+       */
   cache?: boolean;
   /**
-   * For methods of the proxified value, whether to bind the `this` context to the proxified value.
-   * The original reference of this method will NOT be retained. To get the original method, use `getProxyTarget` on the method.
-   *
-   * @default false
-   */
+       * For methods of the proxified value, whether to bind the `this` context to the proxified value.
+       * The original reference of this method will NOT be retained. To get the original method, use `getProxyTarget` on the method.
+       *
+       * @default false
+       */
   bindMethods?: boolean;
 }
 /**

@@ -1,13 +1,11 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-import { n as Metro } from "./types-Q9nY_LVo.js";
+import { n as Metro } from "./types-Ct0e6YQc.js";
 
 //#region lib/modules/src/metro/subscriptions/index.d.ts
 declare namespace index_d_exports {
-  export { ModuleFinishedImportingCallback, ModuleFirstRequiredCallback, ModuleInitializedCallback, onAnyModuleFirstRequired, onAnyModuleInitialized, onModuleFinishedImporting, onModuleFirstRequired, onModuleInitialized };
+  export { ModuleFirstRequiredCallback, ModuleInitializedCallback, onAnyModuleFirstRequired, onAnyModuleInitialized, onModuleFirstRequired, onModuleInitialized };
 }
 type ModuleFirstRequiredCallback = (id: Metro.ModuleID) => void;
 type ModuleInitializedCallback = (id: Metro.ModuleID, exports: Metro.ModuleExports) => void;
-type ModuleFinishedImportingCallback = (id: Metro.ModuleID, path: string) => void;
 /**
  * Registers a callback to be called when any module is initialized.
  *
@@ -33,15 +31,6 @@ declare function onAnyModuleInitialized(callback: ModuleInitializedCallback): ()
  * @returns A function that unregisters the callback.
  */
 declare function onModuleInitialized(id: Metro.ModuleID, callback: ModuleInitializedCallback): () => void;
-/**
- * Registers a callback to be called when a module with a specific import path is initialized.
- *
- * @see {@link initializedModuleHasBadExports} to avoid bad module exports.
- *
- * @param callback The callback to be called.
- * @returns A function that unregisters the callback.
- */
-declare function onModuleFinishedImporting(callback: ModuleFinishedImportingCallback): () => void;
 /**
  * Registers a callback to be called when any module is being initialized.
  *
@@ -95,4 +84,4 @@ declare function getInitializedModuleExports(id: Metro.ModuleID): Metro.ModuleEx
  */
 declare function isModuleExportBad(exp: Metro.ModuleExports[PropertyKey]): boolean;
 //#endregion
-export { utils_d_exports as a, ModuleInitializedCallback as c, onAnyModuleInitialized as d, onModuleFinishedImporting as f, isModuleInitialized as i, index_d_exports as l, onModuleInitialized as m, getModuleDependencies as n, ModuleFinishedImportingCallback as o, onModuleFirstRequired as p, isModuleExportBad as r, ModuleFirstRequiredCallback as s, getInitializedModuleExports as t, onAnyModuleFirstRequired as u };
+export { utils_d_exports as a, index_d_exports as c, onModuleFirstRequired as d, onModuleInitialized as f, isModuleInitialized as i, onAnyModuleFirstRequired as l, getModuleDependencies as n, ModuleFirstRequiredCallback as o, isModuleExportBad as r, ModuleInitializedCallback as s, getInitializedModuleExports as t, onAnyModuleInitialized as u };

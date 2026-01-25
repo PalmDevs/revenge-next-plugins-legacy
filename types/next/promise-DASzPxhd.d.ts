@@ -1,6 +1,3 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-
-//#region lib/utils/src/promise.d.ts
 declare namespace promise_d_exports {
   export { allSettled, sleep, sleepReject };
 }

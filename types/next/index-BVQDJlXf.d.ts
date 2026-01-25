@@ -1,6 +1,3 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-
-//#region lib/modules/src/native/index.d.ts
 declare namespace index_d_exports {
   export { BridgeInfo, MethodArgs, MethodName, MethodResult, Methods, callBridgeMethod, callBridgeMethodSync, getBridgeInfo, getNativeModule };
 }

@@ -1,13 +1,8 @@
-import "../callback-DNr1bYVq.js";
-import "../error-DWG2BlZz.js";
-import { n as Metro } from "../types-Q9nY_LVo.js";
-import "../promise-Du5Pcai3.js";
-import "../proxy-KNbRcH7H.js";
-import { t as ReactNative } from "../types-B3fMYLLv.js";
-import { a as RegisterableAsset, i as PackagerAsset, n as AssetId, r as CustomAsset, t as Asset } from "../types-Crx9sHZ2.js";
+import { n as Metro } from "../types-Ct0e6YQc.js";
+import { t as ReactNative } from "../types-Cpb_IXj7.js";
+import { Asset, AssetId, CustomAsset, PackagerAsset, RegisterableAsset } from "./assets/types.js";
 
 //#region lib/assets/src/preinit.d.ts
-
 /**
  * If you need to use this ID, unproxify {@link AssetsRegistry} first.
  *

@@ -1,16 +1,9 @@
-import "../../callback-DNr1bYVq.js";
-import "../../error-DWG2BlZz.js";
-import "../../types-Q9nY_LVo.js";
-import "../../promise-Du5Pcai3.js";
-import "../../proxy-KNbRcH7H.js";
-import "../../react-navigation-BsoHQk3U.js";
-import "../../native-BXtyFZ8I.js";
-import "../../index-CphpZo9T.js";
-import "../../main_tabs_v2-DHNkP9c9.js";
-import { t as FormSwitch } from "../../FormSwitch-yqH-Y-17.js";
-import { t as Page } from "../../Page-CsXIgQAL.js";
-import { t as SearchInput } from "../../SearchInput-Bkg6SasK.js";
-import { t as TableRowAssetIcon } from "../../TableRowAssetIcon-B7pGEuVI.js";
+import "../../react-navigation-B-L1yoaO.js";
+import "../../index-NLeEsMBb.js";
+import FormSwitch from "./FormSwitch.js";
+import Page from "./Page.js";
+import SearchInput from "./SearchInput.js";
+import TableRowAssetIcon from "./TableRowAssetIcon.js";
 
 //#region lib/components/src/types.d.ts
 interface PluginApiComponents {

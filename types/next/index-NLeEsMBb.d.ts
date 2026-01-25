@@ -1,262 +1,13 @@
-import { t as __export } from "./chunk-Bp6m_JJh.js";
-import { M as Filter, P as FilterGenerator, n as Metro, q as FilterScopes } from "./types-Q9nY_LVo.js";
-import { n as ReactNavigationParamList } from "./react-navigation-BsoHQk3U.js";
-import { s as native_d_exports } from "./native-BXtyFZ8I.js";
-import { n as main_tabs_v2_d_exports } from "./main_tabs_v2-DHNkP9c9.js";
+import { n as ReactNavigationParamList } from "./react-navigation-B-L1yoaO.js";
 import { ComponentProps, ComponentType, FC, ReactElement, ReactNode, RefAttributes, RefObject } from "react";
 import { EventEmitter } from "node:events";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ImageSourcePropType, ImageStyle, PressableProps, StyleProp, TextInputProps as TextInputProps$1, TextProps as TextProps$1, TextStyle, View, ViewProps, ViewStyle } from "react-native";
+import { Buffer } from "buffer";
 
-//#region lib/discord/src/actions.d.ts
-declare namespace actions_d_exports {
-  export { ActionSheetActionCreators, AlertActionCreators, ToastActionCreators };
-}
-declare let ActionSheetActionCreators: DiscordModules.Actions.ActionSheetActionCreators;
-declare let AlertActionCreators: DiscordModules.Actions.AlertActionCreators;
-declare let ToastActionCreators: DiscordModules.Actions.ToastActionCreators;
-//#endregion
-//#region lib/discord/src/flux/dispatcher.d.ts
-type FluxEventDispatchPatch<T$1 extends object = object> = (payload: DiscordModules.Flux.DispatcherPayload & T$1) => (DiscordModules.Flux.DispatcherPayload & T$1) | undefined | void;
-/**
- * Registers a patch for all Flux events.
- *
- * @see {@link onFluxEventDispatched} for more details.
- *
- * @param patch The patch function to apply when any Flux event is dispatched.
- * @returns A function that can be used to remove the patch.
- */
-declare function onAnyFluxEventDispatched(patch: FluxEventDispatchPatch): () => void;
-/**
- * Registers a patch for a specific Flux event type.
- * @param type The type of the Flux event to patch.
- * @param patch The patch function to apply when the event is dispatched.
- * @returns A function that can be used to remove the patch.
- *
- * @example Blocking the disptach
- * ```ts
- * // Returning falsy values will prevent the event from being dispatched.
- * onFluxEventDispatched('TYPING_START', () => {})
- * ```
- *
- * @example Modifying the payload
- * ```ts
- * onFluxEventDispatched('TYPING_START', payload => {
- *   // Send the typing event to this channel instead.
- *   payload.channelId = '123456789012345678'
- *   // Make sure to return the modified payload!
- *   return payload
- * })
- * ```
- *
- * @example Reading and passing through the payload
- * ```ts
- * onFluxEventDispatched('TYPING_START', payload => {
- *   console.log('Typing started:', payload)
- *   // Do nothing, just return the payload.
- *   return payload
- * })
- * ```
- */
-declare function onFluxEventDispatched<T$1 extends object = object>(type: DiscordModules.Flux.DispatcherPayload['type'], patch: FluxEventDispatchPatch<T$1>): () => void;
-//#endregion
-//#region lib/discord/src/preinit.d.ts
-declare const AppStartPerformance$1: DiscordModules.AppStartPerformance;
-declare namespace flux_d_exports {
-  export { Dispatcher, DispatcherModuleId };
-}
-declare const Dispatcher: DiscordModules.Flux.Dispatcher, DispatcherModuleId: number;
-declare namespace utils_d_exports {
-  export { TypedEventEmitter$1 as TypedEventEmitter };
-}
-/**
- * Do not use the `error` event, as the module will handle it specially for some reason.
- */
-declare let TypedEventEmitter$1: typeof DiscordModules.Utils.TypedEventEmitter;
-declare namespace index_d_exports {
-  export { AppStartPerformance$1 as AppStartPerformance, Constants$1 as Constants, ConstantsModuleId, Logger$1 as Logger, LoggerModuleId, Tokens, TokensModuleId, flux_d_exports as flux, utils_d_exports as utils };
-}
-declare const Logger$1: typeof DiscordModules.Logger, LoggerModuleId: number;
-declare const Tokens: any, TokensModuleId: number;
-/**
- * If you need to use this ID, unproxify {@link Constants} first.
- *
- * ```js
- * preinit() {
- *   unproxify(Constants)
- *   // Module ID will now be set!
- *   ConstantsModuleId // ...
- * }
- * ```
- */
-declare let ConstantsModuleId: Metro.ModuleID | undefined;
-declare let Constants$1: DiscordModules.Constants;
-declare namespace design_d_exports {
-  export { Design, FormSwitch };
-}
-declare let Design: Design;
-declare let FormSwitch: DiscordModules.Components.FormSwitch;
-interface Design {
-  createStyles: DiscordModules.Components.Styles.CreateStylesFunction;
-  useTooltip: DiscordModules.Components.UseTooltipFunction;
-  ActionSheet: DiscordModules.Components.ActionSheet;
-  ActionSheetRow: DiscordModules.Components.ActionSheetRow;
-  ActionSheetSwitchRow: DiscordModules.Components.ActionSheetSwitchRow;
-  BottomSheetTitleHeader: DiscordModules.Components.BottomSheetTitleHeader;
-  AlertActionButton: DiscordModules.Components.AlertActionButton;
-  AlertModal: DiscordModules.Components.AlertModal;
-  Button: DiscordModules.Components.Button;
-  Card: DiscordModules.Components.Card;
-  ContextMenu: DiscordModules.Components.ContextMenu;
-  ContextMenuItem: DiscordModules.Components.ContextMenuItem;
-  IconButton: DiscordModules.Components.IconButton;
-  ImageButton: DiscordModules.Components.ImageButton;
-  LayerScope: DiscordModules.Components.LayerScope;
-  NavigatorHeader: DiscordModules.Components.NavigatorHeader;
-  Stack: DiscordModules.Components.Stack;
-  Slider: DiscordModules.Components.Slider;
-  TableCheckboxRow: DiscordModules.Components.TableCheckboxRow;
-  TableRadioGroup: typeof DiscordModules.Components.TableRadioGroup;
-  TableRadioRow: typeof DiscordModules.Components.TableRadioRow;
-  TableRow: DiscordModules.Components.TableRow;
-  TableRowGroup: DiscordModules.Components.TableRowGroup;
-  TableSwitchRow: DiscordModules.Components.TableSwitchRow;
-  Text: DiscordModules.Components.Text;
-  TextArea: DiscordModules.Components.TextArea;
-  TextField: DiscordModules.Components.TextField;
-  TextInput: DiscordModules.Components.TextInput;
-}
-//#endregion
-//#region lib/discord/src/flux/stores.d.ts
-/**
- * A proxy that allows you to access Flux stores by their name, including uninitialized stores.
- *
- * Use `Reflect.ownKeys()` on this proxy to get a list of all initialized stores.
- *
- * @see {@link getStore} for a way to get stores lazily.
- */
-declare const Stores: Record<string, DiscordModules.Flux.Store<object>>;
-/**
- * Gets a Flux store by its name, and calls the provided callback with the store.
- *
- * @param name The name of the store to get.
- * @param callback A callback that will be called with the store once it is found.
- * @returns A function that can be used to cancel the wait for the store.
- */
-declare function getStore<T$1>(name: string, callback: (store: DiscordModules.Flux.Store<T$1>) => void): () => void;
-type WithStore = FilterGenerator<(<T>() => Filter<{
-  Result: DiscordModules.Flux.Store<T>;
-  RequiresExports: boolean;
-  Scopes: [typeof FilterScopes.Uninitialized, typeof FilterScopes.Initialized];
-}>)>;
-/**
- * A dynamic filter that matches all Flux stores.
- */
-declare const withStore: WithStore;
-type WithStoreName = FilterGenerator<(<T>(name: string) => Filter<{
-  Result: DiscordModules.Flux.Store<T>;
-  RequiresExports: true;
-  Scopes: [typeof FilterScopes.Uninitialized, typeof FilterScopes.Initialized];
-}>)>;
-/**
- * A with-exports filter that matches a Flux store by its name.
- */
-declare const withStoreName: WithStoreName;
-declare namespace index_d_exports$1 {
-  export { FluxEventDispatchPatch, Stores, WithStore, WithStoreName, getStore, onAnyFluxEventDispatched, onFluxEventDispatched, withStore, withStoreName };
-}
-declare namespace index_d_exports$2 {
-  export { SettingsItem, SettingsModulesLoadedSubscription, SettingsSection, addSettingsItemToSection, isSettingsModulesLoaded, onSettingsModulesLoaded, refreshSettingsNavigator, refreshSettingsOverviewScreen, registerSettingsItem, registerSettingsItems, registerSettingsSection };
-}
-type SettingsItem = DiscordModules.Modules.Settings.SettingsItem;
-type SettingsSection = DiscordModules.Modules.Settings.SettingsSection;
-type SettingsModulesLoadedSubscription = () => void;
-/**
- * Checks if the settings modules are loaded.
- */
-declare function isSettingsModulesLoaded(): boolean;
-/**
- * Subscribes to when settings modules are loaded.
- * Plugins should ideally register their settings in the given callback to ensure fast startup time.
- *
- * If settings modules are already loaded, the callback will be called immediately.
- *
- * @param subcription The subscription function to call when the settings modules are loaded.
- * @returns A function to unsubscribe from the event.
- */
-declare function onSettingsModulesLoaded(subcription: SettingsModulesLoadedSubscription): () => void;
-/**
- * Registers a settings section with a given key.
- *
- * @param key The key to register the settings section with.
- * @param section The settings section to register.
- * @returns A function to unregister the settings section.
- */
-declare function registerSettingsSection(key: string, section: SettingsSection): () => void;
-/**
- * Registers a settings item with a given key.
- *
- * @param key The key to register the settings item with.
- * @param item The settings item to register.
- * @returns A function to unregister the settings item.
- */
-declare function registerSettingsItem(key: string, item: SettingsItem): () => void;
-/**
- * Registers multiple settings items at once.
- *
- * @param record The settings items to register.
- * @returns A function to unregister the settings items.
- */
-declare function registerSettingsItems(record: Record<string, SettingsItem>): () => void;
-/**
- * Adds a settings item to an existing section.
- *
- * @param key The section to add the settings item to.
- * @param item The settings item to add.
- * @returns A function to remove the settings item from the section.
- */
-declare function addSettingsItemToSection(key: string, item: string): () => void;
-/**
- * Refreshes the SettingsOverviewScreen.
- */
-declare function refreshSettingsOverviewScreen(): void;
-/**
- * Refreshes the settings navigator.
- */
-declare function refreshSettingsNavigator(): void;
-declare namespace renderer_d_exports {
-  export { SettingListRenderer };
-}
-type SettingListRenderer = DiscordModules.Modules.Settings.SettingListRenderer;
-declare let SettingListRenderer: SettingListRenderer;
-//#endregion
-//#region lib/discord/src/types/revenge.d.ts
-interface PluginApiDiscord {
-  actions: PluginApiDiscord.Actions;
-  common: PluginApiDiscord.Common;
-  design: PluginApiDiscord.Design;
-  flux: PluginApiDiscord.Flux;
-  modules: PluginApiDiscord.Modules;
-  native: PluginApiDiscord.Native;
-}
-declare namespace PluginApiDiscord {
-  type Actions = typeof actions_d_exports;
-  type Common = typeof index_d_exports;
-  type Design = typeof design_d_exports;
-  type Flux = typeof index_d_exports$1;
-  type Native = typeof native_d_exports;
-  interface Modules {
-    mainTabsV2: typeof main_tabs_v2_d_exports;
-    settings: typeof index_d_exports$2 & typeof renderer_d_exports;
-  }
-}
-declare module '@revenge-mod/plugins/types' {
-  interface UnscopedInitPluginApi {
-    discord: PluginApiDiscord;
-  }
-  interface InitPluginApi {
-    logger: DiscordModules.Logger;
-  }
+//#region lib/discord/src/types/polyfills.d.ts
+declare global {
+  var Buffer: typeof Buffer;
 }
 //#endregion
 //#region lib/discord/src/types/index.d.ts
@@ -306,16 +57,16 @@ declare namespace DiscordModules {
       register(name: string, actionHandler: Record<string, (e: DispatcherPayload) => void>, storeDidChange: (e: DispatcherPayload) => boolean): string;
       setInterceptor(interceptor?: (payload: DispatcherPayload) => undefined | boolean): void;
       /**
-       * Subscribes to an action type
-       * @param actionType The action type to subscribe to
-       * @param callback The callback to call when the action is dispatched
-       */
+                   * Subscribes to an action type
+                   * @param actionType The action type to subscribe to
+                   * @param callback The callback to call when the action is dispatched
+                   */
       subscribe(actionType: string, callback: (payload: DispatcherPayload) => void): void;
       /**
-       * Unsubscribes from an action type
-       * @param actionType The action type to unsubscribe from
-       * @param callback The callback to remove
-       */
+                   * Unsubscribes from an action type
+                   * @param actionType The action type to unsubscribe from
+                   * @param callback The callback to remove
+                   */
       unsubscribe(actionType: string, callback: (payload: DispatcherPayload) => void): void;
       wait(cb: () => void): void;
     }
@@ -332,10 +83,10 @@ declare namespace DiscordModules {
     [K: string]: string | number | boolean | null | ((...args: any[]) => any) | Constants;
   }
   /**
-   * Discord's `Logger` class.
-   *
-   * Logs will be shown in the **Debug Logs** section in settings.
-   */
+       * Discord's `Logger` class.
+       *
+       * Logs will be shown in the **Debug Logs** section in settings.
+       */
   class Logger {
     constructor(tag: string);
     logDangerously(...args: unknown[]): void;
@@ -363,8 +114,8 @@ declare namespace DiscordModules {
         icon?: number | FC;
         IconComponent?: FC;
         /**
-         * The icon's color, same string format as `<Text>`'s color prop
-         */
+                         * The icon's color, same string format as `<Text>`'s color prop
+                         */
         iconColor?: string;
         containerStyle?: ViewStyle;
       }): void;
@@ -643,13 +394,16 @@ declare namespace DiscordModules {
       export interface SettingsListProps {
         containerStyle?: StyleProp<ViewStyle>;
         initialSetting?: string;
-        ListHeaderComponent?: ComponentType;
-        ListFooterComponent?: ComponentType;
-        sections: Array<{
-          label?: string | ReactNode;
-          settings: string[];
-          subLabel?: string | ReactNode;
-        }>;
+        node: {
+          type: 'list';
+          ListHeaderComponent?: ComponentType;
+          ListFooterComponent?: ComponentType;
+          sections: Array<{
+            label?: string | ReactNode;
+            settings: string[];
+            subLabel?: string | ReactNode;
+          }>;
+        };
       }
       export type SettingsList = FC<SettingsListProps>;
       export interface SettingsSection {
@@ -670,6 +424,7 @@ declare namespace DiscordModules {
       }
       export interface PressableSettingsItem extends BaseSettingsItem {
         type: 'pressable';
+        withArrow?: boolean;
         onPress?: () => void;
       }
       export interface ToggleSettingsItem extends BaseSettingsItem {
@@ -696,8 +451,8 @@ declare namespace DiscordModules {
       type DefaultEventMap = [never];
       type EventMap<T> = Record<keyof T, any[]> | DefaultEventMap;
     }
-    class TypedEventEmitter<T extends TypedEventEmitter.EventMap<T> = TypedEventEmitter.DefaultEventMap> extends EventEmitter<T> {}
+    class TypedEventEmitter<T extends Record<string, any[]> = Record<string, any[]>> extends EventEmitter<T> {}
   }
 }
 //#endregion
-export { utils_d_exports as A, ToastActionCreators as B, Constants$1 as C, Tokens as D, LoggerModuleId as E, FluxEventDispatchPatch as F, onAnyFluxEventDispatched as I, onFluxEventDispatched as L, DispatcherModuleId as M, flux_d_exports as N, TokensModuleId as O, AppStartPerformance$1 as P, ActionSheetActionCreators as R, FormSwitch as S, Logger$1 as T, WithStoreName as _, SettingsModulesLoadedSubscription as a, withStoreName as b, isSettingsModulesLoaded as c, refreshSettingsOverviewScreen as d, registerSettingsItem as f, WithStore as g, Stores as h, SettingsItem as i, Dispatcher as j, TypedEventEmitter$1 as k, onSettingsModulesLoaded as l, registerSettingsSection as m, PluginApiDiscord as n, SettingsSection as o, registerSettingsItems as p, SettingListRenderer as r, addSettingsItemToSection as s, DiscordModules as t, refreshSettingsNavigator as u, getStore as v, ConstantsModuleId as w, Design as x, withStore as y, AlertActionCreators as z };
+export { DiscordModules as t };

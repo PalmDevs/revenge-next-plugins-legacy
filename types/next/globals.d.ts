@@ -1,17 +1,10 @@
-import "./callback-DNr1bYVq.js";
-import "./error-DWG2BlZz.js";
-import { n as Metro } from "./types-Q9nY_LVo.js";
-import "./promise-Du5Pcai3.js";
-import "./proxy-KNbRcH7H.js";
-import "./utils-DVo51UEA.js";
-import "./types-B3fMYLLv.js";
-import "./index-CEFhTJtd.js";
-import "./index-8QuIENve.js";
-import "./constants-Du6Y7hwa.js";
-import { a as PluginApiExtensionsOptions, f as PluginManifest, p as PluginOptions } from "./types-BBuDfLvt.js";
-import "./index-39shk8yo.js";
-import "./index-s2zcKmcl.js";
-import "./index-Di-Mayfc.js";
+import { n as Metro } from "./types-Ct0e6YQc.js";
+import "./utils-DXrVt5U8.js";
+import "./index-CrguKj0G.js";
+import "./fs-DJKLNjzi.js";
+import { a as PluginApiExtensionsOptions, f as PluginManifest, p as PluginOptions } from "./types-C9kxY9uN.js";
+import "./index-BSFxRxwT.js";
+import "./index-BTYR7jr_.js";
 import { ImageProps, ScrollViewProps, TextProps, ViewProps } from "react-native";
 
 //#region types/globals.d.ts
@@ -26,20 +19,16 @@ declare module 'react' {
       RCTText: TextProps;
     }
   }
-}
-
-/// HERMES
-
+} /// HERMES
 declare global {
   const HermesInternal: HermesInternalObject;
   function setTimeout(cb: (...args: unknown[]) => unknown, timeout?: number): number;
   /**
-   * Calls the garbage collector
-   */
+       * Calls the garbage collector
+       */
   function gc(): void;
   interface HermesInternalObject {
-    getRuntimeProperties(): Record<string, string>;
-    // biome-ignore lint/complexity/noBannedTypes: You can pass any function here
+    getRuntimeProperties(): Record<string, string>; // biome-ignore lint/complexity/noBannedTypes: You can pass any function here
     getFunctionLocation(fn: Function): {
       fileName: string;
       lineNumber: number;
@@ -49,10 +38,7 @@ declare global {
       isNative: boolean;
     };
   }
-}
-
-/// HERMES PROMISES
-
+} /// HERMES PROMISES
 declare global {
   // biome-ignore lint/correctness/noUnusedVariables: Type parameter names must match
   interface Promise<T> {
@@ -60,18 +46,15 @@ declare global {
     /// AND: https://github.com/facebook/hermes/blob/main/lib/InternalBytecode/01-Promise.js
     _h: 0 | 1 | 2;
     /**
-     * The resolved value of the promise, if it has been resolved.
-     */
+             * The resolved value of the promise, if it has been resolved.
+             */
     _j: any;
   }
   type HermesPromiseRejectionHandler = (promise: Promise<any>, error: any) => void;
   interface PromiseConstructor {
     _m: HermesPromiseRejectionHandler;
   }
-}
-
-/// REACT DEVTOOLS
-
+} /// REACT DEVTOOLS
 declare global {
   var __REACT_DEVTOOLS_GLOBAL_HOOK__: unknown | undefined;
   var __REACT_DEVTOOLS__: {
@@ -84,10 +67,7 @@ declare global {
       }): void;
     };
   } | undefined;
-}
-
-/// METRO
-
+} /// METRO
 declare global {
   var __METRO_GLOBAL_PREFIX__: '';
   var __d: Metro.DefineFn;
@@ -96,10 +76,7 @@ declare global {
     importAll: Metro.ImportAllFn;
   };
   var __c: Metro.ClearFn;
-}
-
-/// REACT NATIVE
-
+} /// REACT NATIVE
 declare global {
   var nativeModuleProxy: Record<string, unknown>;
   var __turboModuleProxy: ((name: string) => unknown) | undefined;

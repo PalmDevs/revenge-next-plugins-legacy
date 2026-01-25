@@ -1,10 +1,11 @@
-import "../../../../callback-DNr1bYVq.js";
-import "../../../../error-DWG2BlZz.js";
-import "../../../../types-Q9nY_LVo.js";
-import "../../../../promise-Du5Pcai3.js";
-import "../../../../proxy-KNbRcH7H.js";
-import "../../../../react-navigation-BsoHQk3U.js";
-import "../../../../native-BXtyFZ8I.js";
-import { r as SettingListRenderer } from "../../../../index-CphpZo9T.js";
-import "../../../../main_tabs_v2-DHNkP9c9.js";
-export { SettingListRenderer };
+import "../../../../react-navigation-B-L1yoaO.js";
+import { t as DiscordModules } from "../../../../index-NLeEsMBb.js";
+
+//#region lib/discord/src/modules/settings/renderer.d.ts
+declare namespace renderer_d_exports {
+  export { SettingListRenderer };
+}
+type SettingListRenderer = DiscordModules.Modules.Settings.SettingListRenderer;
+declare let SettingListRenderer: SettingListRenderer;
+//#endregion
+export { SettingListRenderer, renderer_d_exports as t };
