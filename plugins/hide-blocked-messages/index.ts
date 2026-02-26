@@ -4,6 +4,7 @@ import { withName } from '@revenge-mod/modules/finders/filters'
 import { instead } from '@revenge-mod/patcher'
 import { registerPlugin } from '@revenge-mod/plugins/_'
 import { PluginFlags } from '@revenge-mod/plugins/constants'
+import { StorageUpdateMode } from '@revenge-mod/storage'
 import SettingsComponent from './settings'
 import type { DiscordModules } from '@revenge-mod/discord/types'
 
@@ -100,7 +101,7 @@ registerPlugin<{ storage: Settings }>(
                         const [{ type, message, content }] = args
 
                         switch (type) {
-                            // Normal message row
+                            // Normal message row (has row.message)
                             case 1: {
                                 // Do some checking so we don't hide false positives
                                 const { channelId, id, referencedMessage } =
@@ -135,8 +136,10 @@ registerPlugin<{ storage: Settings }>(
 
                                 break
                             }
-                            // Blocked/Ignored row
-                            case 2: {
+                            // Blocked/Ignored row (2 = blocked, 6 = ignored)
+                            // Doesn't have row.message, but has content
+                            case 2:
+                            case 6: {
                                 // Why does this work?
                                 // - The generated row is either a blocked or ignored row, and will always have a message
                                 // - If they stack (2+ ignored/blocked messages), the row is of the same type, so we can just check the first message
@@ -159,7 +162,8 @@ registerPlugin<{ storage: Settings }>(
                 ),
                 // If settings change, mark plugin as needing reload to apply changes
                 // We can potentially try to regenerate the rows, but that would be more complex, and probably not worth it
-                storage.subscribe(() => {
+                storage.subscribe((_, mode) => {
+                    if (mode === StorageUpdateMode.Load) return
                     plugin.flags |= PluginFlags.ReloadRequired
                 }),
             )
