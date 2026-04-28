@@ -6,7 +6,7 @@ import {
 import { after, before } from '@revenge-mod/patcher'
 import { registerPlugin } from '@revenge-mod/plugins/_'
 import { PluginFlags } from '@revenge-mod/plugins/constants'
-import { findInReactFiber } from '@revenge-mod/utils/react'
+import { findInReactFiber, useReRender } from '@revenge-mod/utils/react'
 import { SettingsComponent } from './settings'
 import type {
     Filter,
@@ -14,6 +14,8 @@ import type {
     FilterScopes,
 } from '@revenge-mod/modules/finders/filters'
 import type {
+    ComponentType,
+    FC,
     ForwardRefRenderFunction,
     MemoExoticComponent,
     NamedExoticComponent,
@@ -60,9 +62,12 @@ registerPlugin<{ storage: Settings }>(
             },
         },
         async start({ cleanup, storage }) {
+            let reRenderActions: ReturnType<typeof useReRender>
+            let shouldHideActions = false
+
             cleanup(
                 getModules(
-                    byMemoizedNamedExoticComponent<
+                    byMemoizedNamedForwardRefExoticComponent<
                         SendButtonRef,
                         {
                             hasPendingAttachments: boolean
@@ -71,7 +76,7 @@ registerPlugin<{ storage: Settings }>(
                     >('ChatInputSendButton'),
                     ChatInputSendButton => {
                         const [ChatInputActions] = lookupModule(
-                            byMemoizedNamedExoticComponent<
+                            byMemoizedNamedForwardRefExoticComponent<
                                 ActionsRef,
                                 {
                                     canStartThreads: boolean
@@ -112,15 +117,20 @@ registerPlugin<{ storage: Settings }>(
                                     item.sendVoiceMessageEnabled =
                                         !settings.hide.voice
 
+                                const { sendEnabled } = item
+
+                                if (reRenderActions) {
+                                    shouldHideActions = sendEnabled
+                                    reRenderActions()
+                                }
+
                                 if (settings.collapse.send) {
-                                    const { isOnCooldown, sendEnabled } = item
-                                    if (isOnCooldown || !sendEnabled)
-                                        return null
+                                    if (!sendEnabled) return null
                                 }
 
                                 return tree
                             }),
-
+                            // Old ChatInput design
                             before(ChatInputActions!.type, 'render', args => {
                                 const [props] = args
 
@@ -172,6 +182,48 @@ registerPlugin<{ storage: Settings }>(
                         )
                     },
                 ),
+                // New ChatInput redesign
+                getModules(
+                    byMemoizedNamedComponent<
+                        FC<{
+                            shouldShowGiftButton: boolean
+                        }>
+                    >('ChatInputRightActions'),
+                    ChatInputRightActions => {
+                        cleanup(
+                            before(
+                                ChatInputRightActions.type,
+                                'render',
+                                args => {
+                                    const [props] = args
+
+                                    props.shouldShowGiftButton =
+                                        !settings.hide.gift
+
+                                    return args
+                                },
+                            ),
+                            after(
+                                ChatInputRightActions.type,
+                                'render',
+                                tree => {
+                                    if (
+                                        settings.collapse.actions &&
+                                        shouldHideActions
+                                    )
+                                        return null
+                                    return tree
+                                },
+                            ),
+                        )
+
+                        // No cleanup to prevent breaking rules of React hooks
+                        before(ChatInputRightActions.type, 'render', args => {
+                            reRenderActions = useReRender()
+                            return args
+                        })
+                    },
+                ),
             )
 
             const settings = await storage.get()
@@ -182,12 +234,17 @@ registerPlugin<{ storage: Settings }>(
     0,
 )
 
+interface ActualNamedExoticComponent<T extends ComponentType<any>, P = object>
+    extends NamedExoticComponent<P> {
+    render: T
+}
+
 interface ForwardRefExoticComponent<T, P = object>
     extends NamedExoticComponent<P> {
     render: ForwardRefRenderFunction<T, P>
 }
 
-type ByMemoizedNamedExoticComponent = FilterGenerator<
+type ByMemoizedNamedForwardRefExoticComponent = FilterGenerator<
     <T, P = object>(
         name: string,
     ) => Filter<{
@@ -197,12 +254,28 @@ type ByMemoizedNamedExoticComponent = FilterGenerator<
     }>
 >
 
-const byMemoizedNamedExoticComponent = createFilterGenerator(
+type ByMemoizedNamedComponent = FilterGenerator<
+    <T extends ComponentType<any>, P = object>(
+        name: string,
+    ) => Filter<{
+        Result: MemoExoticComponent<ActualNamedExoticComponent<T, P>>
+        RequiresExports: true
+        Scopes: [typeof FilterScopes.Initialized]
+    }>
+>
+
+const byMemoizedNamedComponent = createFilterGenerator(
+    ([name], _, exports) => exports.type?.displayName === name,
+    ([name]) => `byMemoizedNamedComponent(${name})`,
+    FilterFlag.RequiresExports,
+) as ByMemoizedNamedComponent
+
+const byMemoizedNamedForwardRefExoticComponent = createFilterGenerator(
     ([name], _, exports) =>
         exports.type?.render?.length === 2 && exports.type.displayName === name,
-    ([name]) => `byMemoizedNamedExoticComponent(${name})`,
+    ([name]) => `byMemoizedNamedForwardRefExoticComponent(${name})`,
     FilterFlag.RequiresExports,
-) as ByMemoizedNamedExoticComponent
+) as ByMemoizedNamedForwardRefExoticComponent
 
 interface ActionsRef {
     onDismissActions(): void

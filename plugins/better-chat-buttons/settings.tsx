@@ -24,11 +24,11 @@ export function SettingsComponent({ api }: Props) {
             <ScrollView>
                 <Stack spacing={24}>
                     <Text
-                        color="text-danger"
+                        color="text-feedback-critical"
                         variant="text-md/semibold"
                         style={{ textAlign: 'center' }}
                     >
-                        ❗ Changes are only applied when you start typing again.
+                        ❗ Changes are only applied when you restart the app
                     </Text>
                     <HideActionButtonsSetting api={api} />
                     <ActionButtonsCollapseBehaviorSetting api={api} />
