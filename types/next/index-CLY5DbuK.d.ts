@@ -1,6 +1,4 @@
-import { n as RunApplicationCallback } from "./types-Cpb_IXj7.js";
-
-//#region lib/react/src/native/index.d.ts
+import { n as RunApplicationCallback } from "./types-DF_Zi2C5.js";
 declare namespace index_d_exports {
   export { onRunApplication, onRunApplicationFinished };
 }

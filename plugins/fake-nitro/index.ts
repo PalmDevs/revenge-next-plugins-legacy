@@ -1,8 +1,7 @@
 import { getModules } from '@revenge-mod/modules/finders'
 import { withProps } from '@revenge-mod/modules/finders/filters'
 import { instead } from '@revenge-mod/patcher'
-import { registerPlugin } from '@revenge-mod/plugins/_'
-import { PluginFlags } from '@revenge-mod/plugins/constants'
+import { PluginFlags, registerInternalPlugin } from '@revenge-mod/plugins/_'
 import { getErrorStack } from '@revenge-mod/utils/error'
 import fakeifyExpressions from './patches/expressions/fakeify'
 import realifyExpressions from './patches/expressions/realify'
@@ -16,7 +15,7 @@ import type {
 import type { ComponentProps } from 'react'
 
 interface ApiOptions {
-    storage: {
+    jsonStorage: {
         expressions: {
             emojis: {
                 transform: boolean
@@ -44,7 +43,7 @@ export type FakeNitroPluginContext = PluginApi<ApiOptions>
 export let ProductCatalog: ProductCatalog
 export let canActuallyUse: OmitThisParameter<ProductCatalog['canUserUse']>
 
-registerPlugin<ApiOptions>(
+registerInternalPlugin<ApiOptions>(
     {
         id: 'palmdevs.fake-nitro',
         name: 'Fake Nitro',
@@ -93,7 +92,7 @@ registerPlugin<ApiOptions>(
                     )
                 }
         },
-        storage: {
+        jsonStorage: {
             load: true,
             default: {
                 expressions: {
@@ -116,7 +115,6 @@ registerPlugin<ApiOptions>(
         SettingsComponent,
     },
     PluginFlags.Enabled,
-    0,
 )
 
 interface ProductCatalog {

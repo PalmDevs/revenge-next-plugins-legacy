@@ -1,10 +1,9 @@
 import { Stores } from '@revenge-mod/discord/flux'
+import { JsonStorageUpdateMode } from '@revenge-mod/json-storage'
 import { getModules } from '@revenge-mod/modules/finders'
 import { withName } from '@revenge-mod/modules/finders/filters'
 import { instead } from '@revenge-mod/patcher'
-import { registerPlugin } from '@revenge-mod/plugins/_'
-import { PluginFlags } from '@revenge-mod/plugins/constants'
-import { StorageUpdateMode } from '@revenge-mod/storage'
+import { PluginFlags, registerInternalPlugin } from '@revenge-mod/plugins/_'
 import SettingsComponent from './settings'
 import type { DiscordModules } from '@revenge-mod/discord/types'
 
@@ -48,7 +47,7 @@ interface ChatManager {
     }
 }
 
-registerPlugin<{ storage: Settings }>(
+registerInternalPlugin<{ jsonStorage: Settings }>(
     {
         name: 'Hide Blocked Messages',
         id: 'palmdevs.hide-blocked-messages',
@@ -58,7 +57,7 @@ registerPlugin<{ storage: Settings }>(
         icon: 'DenyIcon',
     },
     {
-        storage: {
+        jsonStorage: {
             load: true,
             default: {
                 blocked: true,
@@ -66,7 +65,7 @@ registerPlugin<{ storage: Settings }>(
                 replies: false,
             },
         },
-        start({ cleanup, storage, plugin }) {
+        start({ cleanup, jsonStorage: storage, plugin }) {
             function patchChatManager(ChatManager: ChatManager) {
                 const RelationshipStore =
                     Stores.RelationshipStore as DiscordModules.Flux.Store<{
@@ -163,16 +162,15 @@ registerPlugin<{ storage: Settings }>(
                 // If settings change, mark plugin as needing reload to apply changes
                 // We can potentially try to regenerate the rows, but that would be more complex, and probably not worth it
                 storage.subscribe((_, mode) => {
-                    if (mode === StorageUpdateMode.Load) return
-                    plugin.flags |= PluginFlags.ReloadRequired
+                    if (mode === JsonStorageUpdateMode.Load) return
+                    plugin.requireReload()
                 }),
             )
         },
         stop({ plugin }) {
-            plugin.flags |= PluginFlags.ReloadRequired
+            plugin.requireReload()
         },
         SettingsComponent,
     },
     PluginFlags.Enabled,
-    0,
 )

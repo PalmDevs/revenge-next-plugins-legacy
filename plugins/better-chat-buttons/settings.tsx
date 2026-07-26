@@ -16,7 +16,7 @@ const {
     Text,
 } = Design
 
-type Props = ComponentProps<PluginSettingsComponent<{ storage: Settings }>>
+type Props = ComponentProps<PluginSettingsComponent<{ jsonStorage: Settings }>>
 
 export function SettingsComponent({ api }: Props) {
     return (
@@ -52,7 +52,9 @@ function HideActionButtonsSetting({ api }: Props) {
                     [name: string, icon: string, key: keyof Settings['hide']]
                 >
             ).map(([label, icon, key]) => {
-                const setting = api.storage.use(x => x.hide && key in x.hide)!
+                const setting = api.jsonStorage.use(
+                    x => x.hide && key in x.hide,
+                )!
 
                 return (
                     <TableSwitchRow
@@ -63,7 +65,7 @@ function HideActionButtonsSetting({ api }: Props) {
                         label={`Hide ${label}`}
                         value={setting.hide[key]}
                         onValueChange={(v: boolean) => {
-                            api.storage.set({
+                            api.jsonStorage.set({
                                 hide: {
                                     [key]: v,
                                 },
@@ -79,14 +81,14 @@ function HideActionButtonsSetting({ api }: Props) {
 function ActionButtonsCollapseBehaviorSetting({ api }: Props) {
     const {
         collapse: { actions: setting },
-    } = api.storage.use(x => x.collapse && 'actions' in x.collapse)!
+    } = api.jsonStorage.use(x => x.collapse && 'actions' in x.collapse)!
 
     return (
         <TableRadioGroup
             title="Action Buttons Collapse Behavior"
             defaultValue={setting}
             onChange={v => {
-                api.storage.set({
+                api.jsonStorage.set({
                     collapse: {
                         actions: v,
                     },
@@ -106,14 +108,14 @@ function ActionButtonsCollapseBehaviorSetting({ api }: Props) {
 function SendButtonCollapseBehaviorSetting({ api }: Props) {
     const {
         collapse: { send: setting },
-    } = api.storage.use(x => x.collapse && 'send' in x.collapse)!
+    } = api.jsonStorage.use(x => x.collapse && 'send' in x.collapse)!
 
     return (
         <TableRadioGroup
             title="Send Button Collapse Behavior"
             defaultValue={setting}
             onChange={v => {
-                api.storage.set({
+                api.jsonStorage.set({
                     collapse: {
                         send: v,
                     },

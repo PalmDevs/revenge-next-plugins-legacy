@@ -4,8 +4,7 @@ import {
     FilterFlag,
 } from '@revenge-mod/modules/finders/filters'
 import { after, before } from '@revenge-mod/patcher'
-import { registerPlugin } from '@revenge-mod/plugins/_'
-import { PluginFlags } from '@revenge-mod/plugins/constants'
+import { PluginFlags, registerInternalPlugin } from '@revenge-mod/plugins/_'
 import { findInReactFiber, useReRender } from '@revenge-mod/utils/react'
 import { SettingsComponent } from './settings'
 import type {
@@ -36,7 +35,7 @@ export interface Settings {
     }
 }
 
-registerPlugin<{ storage: Settings }>(
+registerInternalPlugin<{ jsonStorage: Settings }>(
     {
         id: 'palmdevs.better-chat-buttons',
         name: 'Better Chat Buttons',
@@ -46,7 +45,7 @@ registerPlugin<{ storage: Settings }>(
         icon: 'ChatCheckIcon',
     },
     {
-        storage: {
+        jsonStorage: {
             load: true,
             default: {
                 collapse: {
@@ -61,7 +60,7 @@ registerPlugin<{ storage: Settings }>(
                 },
             },
         },
-        async start({ cleanup, storage }) {
+        async start({ cleanup, jsonStorage: storage }) {
             let reRenderActions: ReturnType<typeof useReRender>
             let shouldHideActions = false
 
@@ -130,7 +129,7 @@ registerPlugin<{ storage: Settings }>(
 
                                 return tree
                             }),
-                            // Old ChatInput design
+
                             before(ChatInputActions!.type, 'render', args => {
                                 const [props] = args
 
@@ -231,7 +230,6 @@ registerPlugin<{ storage: Settings }>(
         SettingsComponent,
     },
     PluginFlags.Enabled,
-    0,
 )
 
 interface ActualNamedExoticComponent<T extends ComponentType<any>, P = object>

@@ -10,7 +10,7 @@ import type { Settings } from '.'
 const { Stack, TableRadioGroup, TableRadioRow, TableRowGroup, TableSwitchRow } =
     Design
 
-type Props = ComponentProps<PluginSettingsComponent<{ storage: Settings }>>
+type Props = ComponentProps<PluginSettingsComponent<{ jsonStorage: Settings }>>
 
 export function SettingsComponent({ api }: Props) {
     return (
@@ -27,14 +27,14 @@ export function SettingsComponent({ api }: Props) {
 }
 
 function AvatarSourceSetting({ api }: Props) {
-    const setting = api.storage.use(x => x.avatar)!.avatar
+    const setting = api.jsonStorage.use(x => x.avatar)!.avatar
 
     return (
         <TableRadioGroup
             title="Avatars"
             defaultValue={setting}
             onChange={(v: DataSource | false) => {
-                api.storage.set({
+                api.jsonStorage.set({
                     avatar: v,
                 })
             }}
@@ -47,14 +47,14 @@ function AvatarSourceSetting({ api }: Props) {
 }
 
 function NameSourceSetting({ api }: Props) {
-    const setting = api.storage.use(x => x.name)!.name
+    const setting = api.jsonStorage.use(x => x.name)!.name
 
     return (
         <TableRadioGroup
             title="Names"
             defaultValue={setting}
             onChange={v => {
-                api.storage.set({
+                api.jsonStorage.set({
                     name: v,
                 })
             }}
@@ -74,7 +74,7 @@ function NameSourceSetting({ api }: Props) {
 }
 
 function ChannelListAppearanceSettings({ api }: Props) {
-    const setting = api.storage.use(x => x.channel)!.channel
+    const setting = api.jsonStorage.use(x => x.channel)!.channel
 
     return (
         <TableRowGroup
@@ -93,7 +93,7 @@ function ChannelListAppearanceSettings({ api }: Props) {
                     const newAppearance = enabled
                         ? setting.appearance | 1
                         : setting.appearance & ~1
-                    api.storage.set({
+                    api.jsonStorage.set({
                         channel: {
                             appearance: newAppearance,
                         },
@@ -110,7 +110,7 @@ function ChannelListAppearanceSettings({ api }: Props) {
                     const newAppearance = enabled
                         ? setting.appearance | 2
                         : setting.appearance & ~2
-                    api.storage.set({
+                    api.jsonStorage.set({
                         channel: {
                             appearance: newAppearance,
                         },
@@ -130,7 +130,7 @@ function ChannelListAppearanceSettings({ api }: Props) {
                     const newAppearance = enabled
                         ? setting.appearance | 4
                         : setting.appearance & ~4
-                    api.storage.set({
+                    api.jsonStorage.set({
                         channel: {
                             appearance: newAppearance,
                         },

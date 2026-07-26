@@ -3,7 +3,7 @@ import type { FakeNitroPluginContext } from '..'
 
 export default function themes({
     cleanup,
-    storage,
+    jsonStorage: storage,
     unscoped: {
         discord: {
             common: {

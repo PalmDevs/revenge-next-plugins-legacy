@@ -1,10 +1,16 @@
-import { n as ReactNavigationParamList } from "./react-navigation-B-L1yoaO.js";
+import { n as ReactNavigationParamList } from "./react-navigation-C0E6Cr3d.js";
 import { ComponentProps, ComponentType, FC, ReactElement, ReactNode, RefAttributes, RefObject } from "react";
 import { EventEmitter } from "node:events";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ImageSourcePropType, ImageStyle, PressableProps, StyleProp, TextInputProps as TextInputProps$1, TextProps as TextProps$1, TextStyle, View, ViewProps, ViewStyle } from "react-native";
 import { Buffer } from "buffer";
-
+//#region lib/discord/src/types/api.d.ts
+declare module '@revenge-mod/plugins/types' {
+  interface InitPluginApi<O extends PluginApiExtensionsOptions> {
+    logger: DiscordModules.Logger;
+  }
+}
+//#endregion
 //#region lib/discord/src/types/polyfills.d.ts
 declare global {
   var Buffer: typeof Buffer;
@@ -57,16 +63,16 @@ declare namespace DiscordModules {
       register(name: string, actionHandler: Record<string, (e: DispatcherPayload) => void>, storeDidChange: (e: DispatcherPayload) => boolean): string;
       setInterceptor(interceptor?: (payload: DispatcherPayload) => undefined | boolean): void;
       /**
-                   * Subscribes to an action type
-                   * @param actionType The action type to subscribe to
-                   * @param callback The callback to call when the action is dispatched
-                   */
+       * Subscribes to an action type
+       * @param actionType The action type to subscribe to
+       * @param callback The callback to call when the action is dispatched
+       */
       subscribe(actionType: string, callback: (payload: DispatcherPayload) => void): void;
       /**
-                   * Unsubscribes from an action type
-                   * @param actionType The action type to unsubscribe from
-                   * @param callback The callback to remove
-                   */
+       * Unsubscribes from an action type
+       * @param actionType The action type to unsubscribe from
+       * @param callback The callback to remove
+       */
       unsubscribe(actionType: string, callback: (payload: DispatcherPayload) => void): void;
       wait(cb: () => void): void;
     }
@@ -83,10 +89,10 @@ declare namespace DiscordModules {
     [K: string]: string | number | boolean | null | ((...args: any[]) => any) | Constants;
   }
   /**
-       * Discord's `Logger` class.
-       *
-       * Logs will be shown in the **Debug Logs** section in settings.
-       */
+   * Discord's `Logger` class.
+   *
+   * Logs will be shown in the **Debug Logs** section in settings.
+   */
   class Logger {
     constructor(tag: string);
     logDangerously(...args: unknown[]): void;
@@ -114,8 +120,8 @@ declare namespace DiscordModules {
         icon?: number | FC;
         IconComponent?: FC;
         /**
-                         * The icon's color, same string format as `<Text>`'s color prop
-                         */
+         * The icon's color, same string format as `<Text>`'s color prop
+         */
         iconColor?: string;
         containerStyle?: ViewStyle;
       }): void;
@@ -181,6 +187,13 @@ declare namespace DiscordModules {
       image: ImageSourcePropType;
     }
     type ImageButton = FC<ImageButtonProps>;
+    interface FloatingActionButtonProps {
+      icon: number;
+      onPress: () => void;
+      positionBottom?: number;
+      accessibilityLabel?: string;
+    }
+    type FloatingActionButton = FC<FloatingActionButtonProps>;
     interface StackProps extends ViewProps {
       spacing?: number;
       align?: ViewStyle['alignItems'];
@@ -412,7 +425,7 @@ declare namespace DiscordModules {
         index?: number;
       }
       interface BaseSettingsItem {
-        title: () => string;
+        useTitle: () => string;
         parent: string | null;
         unsearchable?: boolean;
         variant?: Components.TableRowProps['variant'];

@@ -1,9 +1,8 @@
 import { onFluxEventDispatched } from '@revenge-mod/discord/flux'
-import { registerPlugin } from '@revenge-mod/plugins/_'
-import { PluginFlags } from '@revenge-mod/plugins/constants'
+import { PluginFlags, registerInternalPlugin } from '@revenge-mod/plugins/_'
 import { noop } from '@revenge-mod/utils/callback'
 
-registerPlugin(
+registerInternalPlugin(
     {
         id: 'palmdevs.silent-typing',
         name: 'Silent Typing',
@@ -17,5 +16,4 @@ registerPlugin(
         },
     },
     PluginFlags.Enabled,
-    0,
 )

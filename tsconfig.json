@@ -12,7 +12,7 @@
     // Type checking
     "strict": true,
     "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noPropertyAccessFromIndexSignature": false,
@@ -25,5 +25,5 @@
 		},
 		"types": ["./types/next/globals", "./node_modules/react-native/types/index"]
 	},
-	"include": ["plugins", "types"]
+	"include": ["plugins", "types", "lib"]
 }

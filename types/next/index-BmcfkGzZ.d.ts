@@ -1,9 +1,9 @@
-import { n as Metro } from "./types-Ct0e6YQc.js";
-import { t as DiscordModules } from "./index-NLeEsMBb.js";
-import { r as flux_d_exports } from "./flux-Dx-lbzSG.js";
-import { t as ImportTrackerModuleId } from "./import-tracker-Bhc-0jzq.js";
-import { n as utils_d_exports } from "./utils-BogNaqIL.js";
-
+import { n as Metro } from "./types-aeIN6rX0.js";
+import { t as DiscordModules } from "./index-CkgRHGNv.js";
+import { r as flux_d_exports } from "./flux-tTtvUBgI.js";
+import { t as ImportTrackerModuleId } from "./import-tracker-Cno9jlVU.js";
+import "./dispatcher-BBcgRrq4.js";
+import { n as utils_d_exports } from "./utils-DvuSXsb-.js";
 //#region lib/discord/src/preinit.d.ts
 declare const AppStartPerformance: DiscordModules.AppStartPerformance;
 declare namespace index_d_exports {

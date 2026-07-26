@@ -1,6 +1,4 @@
-import { n as Metro } from "./types-Ct0e6YQc.js";
-
-//#region lib/modules/src/metro/subscriptions/index.d.ts
+import { n as Metro } from "./types-aeIN6rX0.js";
 declare namespace index_d_exports {
   export { ModuleFirstRequiredCallback, ModuleInitializedCallback, onAnyModuleFirstRequired, onAnyModuleInitialized, onModuleFirstRequired, onModuleInitialized };
 }

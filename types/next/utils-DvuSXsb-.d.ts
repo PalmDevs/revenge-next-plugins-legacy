@@ -1,6 +1,4 @@
-import { t as DiscordModules } from "./index-NLeEsMBb.js";
-
-//#region lib/discord/src/common/utils.d.ts
+import { t as DiscordModules } from "./index-CkgRHGNv.js";
 declare namespace utils_d_exports {
   export { TypedEventEmitter };
 }

@@ -1,5 +1,5 @@
 declare namespace index_d_exports {
-  export { BridgeInfo, MethodArgs, MethodName, MethodResult, Methods, callBridgeMethod, callBridgeMethodSync, getBridgeInfo, getNativeModule };
+  export { BridgeInfo, MethodArgs, MethodName, MethodResult, NativeMethods, callNativeMethod, callNativeMethodSync, getBridgeInfo, getNativeModule, registerJSMethod };
 }
 /**
  * Backwards compatible way to get a native module. Throws an error if the module is not found.
@@ -18,7 +18,7 @@ declare function getNativeModule<T>(name: string): T | null;
  * @param args The arguments to pass to the native method.
  * @returns A promise that resolves with the result of the native method call.
  */
-declare function callBridgeMethod<N extends MethodName>(name: N, args: MethodArgs<N>): Promise<MethodResult<N>>;
+declare function callNativeMethod<N extends MethodName>(name: N, args: MethodArgs<N>): Promise<MethodResult<N>>;
 /**
  * Calls a method on the native module synchronously and returns the result.
  *
@@ -28,20 +28,30 @@ declare function callBridgeMethod<N extends MethodName>(name: N, args: MethodArg
  * @param args The arguments to pass to the native method.
  * @returns The result of the native method call.
  */
-declare function callBridgeMethodSync<N extends MethodName>(name: N, args: MethodArgs<N>): MethodResult<N>;
+declare function callNativeMethodSync<N extends MethodName>(name: N, args: MethodArgs<N>): MethodResult<N>;
 /**
  * Get the bridge information.
  */
 declare function getBridgeInfo(): BridgeInfo | null;
+type AnyFunction = (...args: any[]) => any;
+declare const CallableReturnNativeMethodName: 'revenge.__callableReturn';
+/**
+ * Registers a JS method that can be called from native code.
+ *
+ * @param name The name of the method to register.
+ * @param method The method implementation.
+ */
+declare function registerJSMethod(name: string, method: AnyFunction): void;
 interface BridgeInfo {
   name: string;
   version: number;
 }
-type MethodName = Extract<keyof Methods, string>;
-type MethodArgs<T extends MethodName> = Methods[T][0];
-type MethodResult<T extends MethodName> = Methods[T][1];
-interface Methods {
+type MethodName = Extract<keyof NativeMethods, string>;
+type MethodArgs<T extends MethodName> = NativeMethods[T][0];
+type MethodResult<T extends MethodName> = NativeMethods[T][1];
+interface NativeMethods {
   'revenge.info': [[], BridgeInfo];
+  [CallableReturnNativeMethodName]: [[payload: object], void];
 }
 //#endregion
-export { Methods as a, getBridgeInfo as c, MethodResult as i, getNativeModule as l, MethodArgs as n, callBridgeMethod as o, MethodName as r, callBridgeMethodSync as s, BridgeInfo as t, index_d_exports as u };
+export { NativeMethods as a, getBridgeInfo as c, registerJSMethod as d, MethodResult as i, getNativeModule as l, MethodArgs as n, callNativeMethod as o, MethodName as r, callNativeMethodSync as s, BridgeInfo as t, index_d_exports as u };

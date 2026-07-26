@@ -1,9 +1,6 @@
-import "../../react-navigation-B-L1yoaO.js";
-import { t as DiscordModules } from "../../index-NLeEsMBb.js";
-import * as react2 from "react";
-
+import { t as DiscordModules } from "../../index-CkgRHGNv.js";
 //#region lib/components/src/TableRowAssetIcon.d.ts
-declare function TableRowAssetIcon(props: TableRowAssetIconProps): react2.JSX.Element;
+declare function TableRowAssetIcon(props: TableRowAssetIconProps): import("react").JSX.Element;
 type TableRowAssetIconProps = Omit<DiscordModules.Components.TableRowIconProps, 'source'> & ({
   name: string;
   id?: never;

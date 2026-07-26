@@ -1,26 +1,25 @@
-import { M as Filter, R as FilterResult, n as Metro, s as If, t as MaybeDefaultExportMatched, u as Not } from "./types-Ct0e6YQc.js";
-
+import { M as Filter, R as FilterResult, n as Metro, s as If, t as MaybeDefaultExportMatched, u as Not } from "./types-aeIN6rX0.js";
 //#region lib/modules/src/finders/_internal.d.ts
 interface RunFilterOptions {
   /**
-       * Whether to skip checking the default export.
-       *
-       * @default false
-       */
+   * Whether to skip checking the default export.
+   *
+   * @default false
+   */
   skipDefault?: boolean;
   /**
-       * Whether to allow initializing modules to confirm their exports.
-       *
-       * @default true
-       */
+   * Whether to allow initializing modules to confirm their exports.
+   *
+   * @default true
+   */
   initialize?: boolean;
 }
 type RunFilterReturnExportsOptions<ReturnNamespace extends boolean = boolean> = RunFilterOptions & If<ReturnNamespace, {
   /**
-       * Whether to return the whole module with all exports instead of just the default export **if the default export matches**.
-       *
-       * @default false
-       */
+   * Whether to return the whole module with all exports instead of just the default export **if the default export matches**.
+   *
+   * @default false
+   */
   returnNamespace: true;
 }, {
   returnNamespace?: false;
@@ -29,15 +28,15 @@ type RunFilterReturnExportsOptions<ReturnNamespace extends boolean = boolean> = 
 //#region lib/modules/src/finders/lookup.d.ts
 type LookupModulesOptions<ReturnNamespace extends boolean = boolean, Initialize extends boolean = boolean> = RunFilterReturnExportsOptions<ReturnNamespace> & {
   /**
-       * Whether to use cached lookup results.
-       */
+   * Whether to use cached lookup results.
+   */
   cached?: boolean;
 } & If<Not<Initialize>, {
   /**
-       * Whether to initialize matching uninitialized modules.
-       *
-       * **This will initialize any modules that match the exportsless filter and may cause unintended side effects.**
-       */
+   * Whether to initialize matching uninitialized modules.
+   *
+   * **This will initialize any modules that match the exportsless filter and may cause unintended side effects.**
+   */
   initialize: false;
 }, {
   initialize?: true;
@@ -85,14 +84,14 @@ type WaitForModulesUnsubscribeFunction = () => void;
 type WaitForModulesCallback<T> = (exports: T, id: Metro.ModuleID) => any;
 type WaitForModulesOptions<ReturnNamespace extends boolean = boolean> = RunFilterReturnExportsOptions<ReturnNamespace> & {
   /**
-       * Use cached results **only** (if possible).
-       * If there is no cache result, this works as if you did not pass this option at all.
-       *
-       * By default, waits cache results but does not use them, because new modules may still be found.
-       * Use this option as an optimization if you are sure that you don't need to find new modules once results are cached.
-       *
-       * @default false
-       */
+   * Use cached results **only** (if possible).
+   * If there is no cache result, this works as if you did not pass this option at all.
+   *
+   * By default, waits cache results but does not use them, because new modules may still be found.
+   * Use this option as an optimization if you are sure that you don't need to find new modules once results are cached.
+   *
+   * @default false
+   */
   cached?: boolean;
 };
 type WaitForModulesResult<F extends Filter, O extends WaitForModulesOptions> = O extends RunFilterReturnExportsOptions<true> ? MaybeDefaultExportMatched<FilterResult<F>> : FilterResult<F>;
@@ -122,10 +121,10 @@ declare function waitForModules<F extends Filter, O extends WaitForModulesOption
 //#region lib/modules/src/finders/get.d.ts
 type GetModulesOptions<ReturnNamespace extends boolean = boolean> = WaitForModulesOptions<ReturnNamespace> & LookupModulesOptions<ReturnNamespace, true> & {
   /**
-       * The maximum number of modules to get.
-       *
-       * @default 1
-       */
+   * The maximum number of modules to get.
+   *
+   * @default 1
+   */
   max?: number;
 };
 type GetModulesResult<F extends Filter, O extends GetModulesOptions> = WaitForModulesResult<F, O>;
@@ -133,12 +132,12 @@ type GetModulesCallback<T> = (exports: T, id: Metro.ModuleID) => any;
 type GetModulesUnsubscribeFunction = () => void;
 /**
  * Get modules matching the filter.
- *
- * This is a combination of {@link lookupModule} and {@link waitForModules}.
+ * If the matching modules are already initialized, the callback will be called immediately.
+ * Otherwise, it will be called when the matching modules are initialized.
  *
  * @param filter The filter to use to find the module.
  * @param options The options to use for the find.
- * @returns A promise that resolves to the module's exports or rejects if the find is aborted before a module is found.
+ * @returns A function to unsubscribe.
  *
  * @example
  * ```ts

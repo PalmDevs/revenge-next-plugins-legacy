@@ -41,7 +41,7 @@ export function SettingsComponent({ api }: FakeNitroSettingsComponentProps) {
 }
 
 function EmojisSettings({ api }: FakeNitroSettingsComponentProps) {
-    const settings = api.storage.use(x => x.expressions)!.expressions
+    const settings = api.jsonStorage.use(x => x.expressions)!.expressions
 
     return (
         <TableRowGroup title="Emojis" hasIcons>
@@ -51,7 +51,7 @@ function EmojisSettings({ api }: FakeNitroSettingsComponentProps) {
                 subLabel="Transform unavailable emojis into links when sending messages."
                 value={settings.emojis.size > 0}
                 onValueChange={enabled =>
-                    api.storage.set({
+                    api.jsonStorage.set({
                         expressions: {
                             emojis: { size: enabled ? 48 : 0 },
                         },
@@ -64,7 +64,7 @@ function EmojisSettings({ api }: FakeNitroSettingsComponentProps) {
                 subLabel="Display emoji links as actual emojis in chat."
                 value={settings.emojis.transform}
                 onValueChange={transform =>
-                    api.storage.set({
+                    api.jsonStorage.set({
                         expressions: {
                             emojis: { transform },
                         },
@@ -86,7 +86,7 @@ function EmojisSettings({ api }: FakeNitroSettingsComponentProps) {
                             onValueChange={index => {
                                 const size = emojiSizeLadder[Math.round(index)]
                                 if (size !== undefined) {
-                                    api.storage.set({
+                                    api.jsonStorage.set({
                                         expressions: {
                                             emojis: { size },
                                         },
@@ -119,7 +119,7 @@ function EmojisSettings({ api }: FakeNitroSettingsComponentProps) {
 }
 
 function StickersSettings({ api }: FakeNitroSettingsComponentProps) {
-    const settings = api.storage.use(x => x.expressions)!.expressions
+    const settings = api.jsonStorage.use(x => x.expressions)!.expressions
 
     return (
         <TableRowGroup title="Stickers" hasIcons>
@@ -129,7 +129,7 @@ function StickersSettings({ api }: FakeNitroSettingsComponentProps) {
                 subLabel="Transform unavailable stickers into links when sending messages."
                 value={settings.stickers.size > 0}
                 onValueChange={enabled =>
-                    api.storage.set({
+                    api.jsonStorage.set({
                         expressions: {
                             stickers: { size: enabled ? 160 : 0 },
                         },
@@ -142,7 +142,7 @@ function StickersSettings({ api }: FakeNitroSettingsComponentProps) {
                 subLabel="Display sticker links as actual stickers in chat."
                 value={settings.stickers.transform}
                 onValueChange={transform =>
-                    api.storage.set({
+                    api.jsonStorage.set({
                         expressions: {
                             stickers: { transform },
                         },
@@ -165,7 +165,7 @@ function StickersSettings({ api }: FakeNitroSettingsComponentProps) {
                                 const size =
                                     stickerSizeLadder[Math.round(index)]
                                 if (size !== undefined) {
-                                    api.storage.set({
+                                    api.jsonStorage.set({
                                         expressions: {
                                             stickers: { size },
                                         },
@@ -198,7 +198,7 @@ function StickersSettings({ api }: FakeNitroSettingsComponentProps) {
 }
 
 function ExpressionsSettings({ api }: FakeNitroSettingsComponentProps) {
-    const settings = api.storage.use(x => x.expressions)!.expressions
+    const settings = api.jsonStorage.use(x => x.expressions)!.expressions
 
     return (
         <Stack spacing={8}>
@@ -209,7 +209,7 @@ function ExpressionsSettings({ api }: FakeNitroSettingsComponentProps) {
                     subLabel="Check if you have permission to send embeds before transforming expressions."
                     value={settings.checkPermission}
                     onValueChange={checkPermission =>
-                        api.storage.set({
+                        api.jsonStorage.set({
                             expressions: { checkPermission },
                         })
                     }
@@ -218,7 +218,7 @@ function ExpressionsSettings({ api }: FakeNitroSettingsComponentProps) {
             <TableRadioGroup
                 defaultValue={settings.hyperlink}
                 onChange={v => {
-                    api.storage.set({
+                    api.jsonStorage.set({
                         expressions: { hyperlink: v },
                     })
                 }}

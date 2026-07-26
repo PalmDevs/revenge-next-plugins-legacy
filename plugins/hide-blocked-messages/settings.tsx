@@ -8,11 +8,11 @@ import type { Settings } from '.'
 const { TableRowGroup, TableSwitchRow } = Design
 
 type SettingComponentProps = ComponentProps<
-    PluginSettingsComponent<{ storage: Settings }>
+    PluginSettingsComponent<{ jsonStorage: Settings }>
 >
 
 export default function SettingsComponent({
-    api: { storage },
+    api: { jsonStorage: storage },
 }: SettingComponentProps) {
     const { blocked, ignored, replies } = storage.use()!
 

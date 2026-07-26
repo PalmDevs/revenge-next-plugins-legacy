@@ -16,7 +16,7 @@ declare function getConstants(): {
   cache: string;
 };
 declare module '@revenge-mod/modules/native' {
-  interface Methods {
+  interface NativeMethods {
     'revenge.fs.getConstants': [[], {
       data: string;
       files: string;

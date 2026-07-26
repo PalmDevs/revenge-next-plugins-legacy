@@ -1,6 +1,4 @@
-import { t as DiscordModules } from "./index-NLeEsMBb.js";
-
-//#region lib/discord/src/common/flux.d.ts
+import { t as DiscordModules } from "./index-CkgRHGNv.js";
 declare namespace flux_d_exports {
   export { Dispatcher, DispatcherModuleId };
 }

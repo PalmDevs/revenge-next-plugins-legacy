@@ -1,11 +1,8 @@
-import { n as callback_d_exports } from "./callback-CIOGuQJf.js";
-import { t as error_d_exports } from "./error-dA_KXqZV.js";
-import { n as promise_d_exports } from "./promise-DASzPxhd.js";
-import { l as proxy_d_exports } from "./proxy-hf4yXx8q.js";
-import * as react3 from "react";
+import { n as callback_d_exports } from "./callback-BtvClkpT.js";
+import { t as error_d_exports } from "./error-DaAofQGb.js";
+import { n as promise_d_exports } from "./promise-8SAFxUcZ.js";
+import { l as proxy_d_exports } from "./proxy-C6e33PwH.js";
 import { FC, ReactElement } from "react";
-
-//#region lib/utils/src/object.d.ts
 declare namespace object_d_exports {
   export { cloneDeep, defineLazyProperties, defineLazyProperty, isObject, mergeDeep };
 }
@@ -54,18 +51,18 @@ type SearchTree = Record<string, any>;
 type SearchFilter = (tree: SearchTree) => boolean;
 interface FindInTreeOptions {
   /**
-       * A set of keys to search for in the tree.
-       */
+   * A set of keys to search for in the tree.
+   */
   walkable?: Set<string>;
   /**
-       * A set of keys to ignore when searching the tree.
-       */
+   * A set of keys to ignore when searching the tree.
+   */
   ignore?: Set<string>;
   /**
-       * The maximum depth to search in the tree.
-       *
-       * @default 100
-       */
+   * The maximum depth to search in the tree.
+   *
+   * @default 100
+   */
   maxDepth?: number;
 }
 declare function findInTree<F extends SearchFilter>(tree: SearchTree, filter: F, opts?: FindInTreeOptions): ExtractPredicate<F> | undefined;
@@ -73,20 +70,20 @@ declare namespace react_d_exports {
   export { findInReactFiber, useIsFirstRender, useReRender };
 }
 declare function useIsFirstRender(): boolean;
-declare function useReRender(): react3.ActionDispatch<[]>;
+declare function useReRender(): import("react").ActionDispatch<[]>;
 declare function findInReactFiber<F extends SearchFilter>(fiber: ReactElement, filter: F): ExtractPredicate<F> | undefined;
 //#endregion
 //#region lib/modules/src/finders/filters/constants.d.ts
 declare const FilterFlag: {
   /**
-       * This filter works with and without module exports.
-       * Allowing for both initialized and uninitialized modules to be matched.
-       */
+   * This filter works with and without module exports.
+   * Allowing for both initialized and uninitialized modules to be matched.
+   */
   readonly Dynamic: 0;
   /**
-       * This filter requires module exports to work.
-       * Only initialized modules will be matched.
-       */
+   * This filter requires module exports to work.
+   * Only initialized modules will be matched.
+   */
   readonly RequiresExports: 1;
 };
 /**
@@ -98,17 +95,17 @@ type FilterFlag = number;
  */
 declare const FilterScopes: {
   /**
-       * Include all modules (both initialized and uninitialized, including blacklisted).
-       * This overrides {@link FilterScopes.Uninitialized} and {@link FilterScopes.Initialized}.
-       */
+   * Include all modules (both initialized and uninitialized, including blacklisted).
+   * This overrides {@link FilterScopes.Uninitialized} and {@link FilterScopes.Initialized}.
+   */
   readonly All: 1;
   /**
-       * Include uninitialized modules in the search.
-       */
+   * Include uninitialized modules in the search.
+   */
   readonly Uninitialized: 2;
   /**
-       * Include initialized modules from the search.
-       */
+   * Include initialized modules from the search.
+   */
   readonly Initialized: 4;
 };
 type FilterScope = (typeof FilterScopes)[keyof typeof FilterScopes];
@@ -118,16 +115,16 @@ type FilterScope = (typeof FilterScopes)[keyof typeof FilterScopes];
 type FilterScopeValue = number;
 interface FilterInfo {
   /**
-       * The result type of the filter.
-       */
+   * The result type of the filter.
+   */
   Result: any;
   /**
-       * Whether the filter requires exports to work.
-       */
+   * Whether the filter requires exports to work.
+   */
   RequiresExports: boolean;
   /**
-       * Scopes the filter matches modules in.
-       */
+   * Scopes the filter matches modules in.
+   */
   Scopes: FilterScope[];
 }
 interface DefaultFilterInfo extends FilterInfo {
@@ -159,34 +156,34 @@ type UnionFilterInfo<I1 extends FilterInfo, I2 extends FilterInfo> = {
 };
 interface FilterHelpers<Info extends FilterInfo = DefaultFilterInfo> {
   /**
-       * Manually the key for this filter.
-       *
-       * **Don't use this unless you know what you're doing.** Only API exports should be using this.
-       *
-       * @param key The key to set for this filter.
-       */
+   * Manually the key for this filter.
+   *
+   * **Don't use this unless you know what you're doing.** Only API exports should be using this.
+   *
+   * @param key The key to set for this filter.
+   */
   keyAs<T extends FilterBase<any>>(this: T, key: string): T;
   /**
-       * Combines this filter with another filter, returning a new filter that matches if **both** filters match.
-       *
-       * @param filter The filter to combine with.
-       */
+   * Combines this filter with another filter, returning a new filter that matches if **both** filters match.
+   *
+   * @param filter The filter to combine with.
+   */
   and<T extends FilterBase<any>, F extends FilterBase<any>>(this: T, filter: F): Filter<MergeFilterInfo<Info, FilterInfoOf<F>>>;
   /**
-       * Combines this filter with another filter, returning a new filter that matches if **either** filter matches.
-       *
-       * @param filter The filter to combine with.
-       */
+   * Combines this filter with another filter, returning a new filter that matches if **either** filter matches.
+   *
+   * @param filter The filter to combine with.
+   */
   or<T extends Filter<Info>, F extends FilterBase<any>>(this: T, filter: F): Filter<UnionFilterInfo<Info, FilterInfoOf<F>>>;
   /**
-       * Creates a new instance of this filter.
-       */
+   * Creates a new instance of this filter.
+   */
   'new'(this: Filter<Info>): Filter<Info>;
   /**
-       * Scopes this filter to match specific modules.
-       *
-       * @param scopes The scopes of modules to match.
-       */
+   * Scopes this filter to match specific modules.
+   *
+   * @param scopes The scopes of modules to match.
+   */
   scope<T extends Filter<Info>, const S extends FilterScope[]>(this: T, ...scopes: If<Info['RequiresExports'], [typeof FilterScopes.Initialized], S>): Filter<Info & {
     Scopes: If<Info['RequiresExports'], [typeof FilterScopes.Initialized], S>;
   }>;
@@ -222,7 +219,7 @@ declare function createFilterGenerator<A extends any[]>(filter: (args: A, id: Me
 declare function createFilterGenerator<A extends any[]>(filter: (args: A, id: Metro.ModuleID) => boolean, keyFor: (args: A) => string, flagFor: ((args: A) => FilterFlag) | FilterFlag, defaultScopesFor?: ((args: A) => FilterScopeValue) | FilterScopeValue): FilterGenerator<(...args: A) => Filter>;
 //#endregion
 //#region lib/modules/src/finders/filters/composite.d.ts
-type And = FilterGenerator<(<F1 extends FilterBase, F2 extends FilterBase>(f1: F1, f2: F2) => Filter<MergeFilterInfo<FilterInfoOf<F1>, FilterInfoOf<F2>>>)>;
+type And = FilterGenerator<<F1 extends FilterBase, F2 extends FilterBase>(f1: F1, f2: F2) => Filter<MergeFilterInfo<FilterInfoOf<F1>, FilterInfoOf<F2>>>>;
 /**
  * Combines two filters into one, returning true if **every** filter matches.
  *
@@ -258,7 +255,7 @@ declare const and: (<F1 extends FilterBase, F2 extends FilterBase>(f1: F1, f2: F
   flagsFor: (args: [f1: FilterBase<DefaultFilterInfo>, f2: FilterBase<DefaultFilterInfo>]) => FilterFlag;
   defaultScopesFor: (args: [f1: FilterBase<DefaultFilterInfo>, f2: FilterBase<DefaultFilterInfo>]) => FilterScopeValue;
 };
-type Or = FilterGenerator<(<F1 extends FilterBase, F2 extends FilterBase>(f1: F1, f2: F2) => Filter<UnionFilterInfo<FilterInfoOf<F1>, FilterInfoOf<F2>>>)>;
+type Or = FilterGenerator<<F1 extends FilterBase, F2 extends FilterBase>(f1: F1, f2: F2) => Filter<UnionFilterInfo<FilterInfoOf<F1>, FilterInfoOf<F2>>>>;
 /**
  * Combines two filters into one, returning true if **some** filters match.
  *
@@ -298,63 +295,12 @@ interface ComparableDependencyMap extends Array<Metro.ModuleID | number | null |
   l?: boolean;
   r?: number;
 }
-/**
- * Filter modules by their dependency map.
- *
- * @param deps The dependency map to check for, can be a sparse array or have `null` to be any dependency ("dynamic"). **Order and size matters!**
- *
- * To do proper fingerprinting for modules:
- * @see {@link withDependencies.loose} to loosen the checks.
- * @see {@link withDependencies.relative} to compare dependencies relatively.
- *
- * @example
- * ```ts
- * const { loose, relative } = withDependencies
- *
- * // Logger's module ID is 5
- * // It has 3 dependencies [4, ?, 2]
- *
- * const [Logger] = lookupModule(withDependencies([4, null, 2]))
- * // or
- * const [Logger] = lookupModule(withDependencies([4, , 2]))
- *
- * // Relative dependencies
- * const [Logger] = lookupModule(withDependencies([relative(-1), null, 2]))
- *
- * // Nested dependencies
- * // The last dependency (module ID 2) would need to have zero dependencies:
- * const [Logger] = lookupModule(withDependencies([4, null, []]))
- *
- * // Loose dependencies
- * // Module having these dependencies: [4, ...], [4, ..., ...], [4, ..., ..., ...], etc. would match:
- * const [SomeOtherModule] = lookupModule(withDependencies(loose([4])))
- *
- * // Using filters as dependencies
- * // Match modules with specific exports in their dependencies
- * const [Module] = lookupModule(withDependencies([
- *   withProps('open'), // first dependency must have an 'open' property
- *   withName('MyComponent'), // second dependency must have name === 'MyComponent'
- *   69, // third dependency must be module ID 69
- *   null, // fourth dependency can be anything
- *   420, // fifth dependency must be module ID 420
- *   2 // sixth dependency must be module ID 2
- * ]))
- * ```
- *
- * @example With filter helpers (preferred)
- * ```ts
- * const [Logger] = lookupModule(
- *   withProps('log')
- *     .withDependencies([4, null, 2]),
- * )
- * ```
- */
 declare const withDependencies: WithDependencies;
-type WithDependencies = FilterGenerator<(<T>(deps: ComparableDependencyMap) => Filter<{
+type WithDependencies = FilterGenerator<<T>(deps: ComparableDependencyMap) => Filter<{
   Result: T;
   RequiresExports: false;
   Scopes: [typeof FilterScopes.Uninitialized, typeof FilterScopes.Initialized];
-}>)> & {
+}>> & {
   loose: typeof loose;
   relative: typeof relative;
 };
@@ -375,9 +321,6 @@ declare function loose(deps: ComparableDependencyMap): ComparableDependencyMap;
  * @param root Marks this dependency to compare relatively to the root (returning) module ID being compared. Useful for nested comparisons where you want to compare by the root module ID instead of the parent's module ID of the nested dependency.
  */
 declare function relative(magnitude: Metro.ModuleID, root?: boolean): number;
-declare namespace relative {
-  var withDependencies: (deps: ComparableDependencyMap, magnitude: Metro.ModuleID, root?: boolean) => ComparableDependencyMap;
-}
 declare namespace index_d_exports {
   export { And, ComparableDependencyMap, DefaultFilterInfo, Filter, FilterBase, FilterFlag, FilterGenerator, FilterHelpers, FilterInfo, FilterInfoOf, FilterRequiresExports, FilterResult, FilterScope, FilterScopeValue, FilterScopes, MergeFilterInfo, Or, UnionFilterInfo, WithName, WithProps, WithSingleProp, WithoutProps, and, createFilterGenerator, or, withDependencies, withName, withProps, withSingleProp, withoutProps };
 }
@@ -399,7 +342,7 @@ type FilterRequiringExports<T> = Filter<{
  * ```
  */
 declare const withProps: WithProps;
-type WithProps = FilterGenerator<(<T extends Record<string, any> = Record<string, any>>(prop: keyof T, ...props: Array<keyof T>) => FilterRequiringExports<T>)>;
+type WithProps = FilterGenerator<<T extends Record<string, any> = Record<string, any>>(prop: keyof T, ...props: Array<keyof T>) => FilterRequiringExports<T>>;
 /**
  * Filter modules by their exports having none of the specified properties.
  *
@@ -407,7 +350,7 @@ type WithProps = FilterGenerator<(<T extends Record<string, any> = Record<string
  * @param props More properties to check for (optional).
  */
 declare const withoutProps: WithoutProps;
-type WithoutProps = FilterGenerator<(<T extends Record<string, any>>(prop: string, ...props: string[]) => FilterRequiringExports<T>)>;
+type WithoutProps = FilterGenerator<<T extends Record<string, any>>(prop: string, ...props: string[]) => FilterRequiringExports<T>>;
 /**
  * Filter modules by their exports having only the specified property.
  *
@@ -420,7 +363,7 @@ type WithoutProps = FilterGenerator<(<T extends Record<string, any>>(prop: strin
  * ```
  */
 declare const withSingleProp: WithSingleProp;
-type WithSingleProp = FilterGenerator<(<T extends Record<string, any>>(prop: keyof T) => FilterRequiringExports<T>)>;
+type WithSingleProp = FilterGenerator<<T extends Record<string, any>>(prop: keyof T) => FilterRequiringExports<T>>;
 /**
  * Filter modules by their exports having the specified name.
  *
@@ -452,15 +395,15 @@ type WithSingleProp = FilterGenerator<(<T extends Record<string, any>>(prop: key
  * // const SomeClass: { new(): SomeClass, name: 'SomeClass' }
  */
 declare const withName: WithName;
-type WithName = FilterGenerator<(<T extends object = object>(name: string) => FilterRequiringExports<T>)>;
+type WithName = FilterGenerator<<T extends object = object>(name: string) => FilterRequiringExports<T>>;
 declare namespace discord_d_exports {
   export { WithGeneratedIconComponent, lookupGeneratedIconComponent, withGeneratedIconComponent };
 }
-type WithGeneratedIconComponent = FilterGenerator<(<N extends string>(name: N, ...assets: string[]) => Filter<{
-  Result: { [K in N]: FC<any> };
+type WithGeneratedIconComponent = FilterGenerator<<N extends string>(name: N, ...assets: string[]) => Filter<{
+  Result: { [K in N]: FC<any>; };
   RequiresExports: boolean;
   Scopes: [typeof FilterScopes.Uninitialized, typeof FilterScopes.Initialized];
-}>)>;
+}>>;
 /**
  * Filter by icon component name and asset names.
  *
@@ -502,7 +445,7 @@ type Not<T extends boolean> = T extends true ? false : true;
 type AnyObject = Record<any, any>;
 type LogicalOr<T1, T2> = T1 extends true ? true : T2 extends true ? true : false;
 type LogicalAnd<T1, T2> = T1 extends true ? T2 extends true ? true : false : false;
-type DeepPartial<T> = { [K in keyof T]?: T[K] extends AnyObject ? DeepPartial<T[K]> : T[K] };
+type DeepPartial<T> = { [K in keyof T]?: T[K] extends AnyObject ? DeepPartial<T[K]> : T[K]; };
 type ExtractPredicate<T> = T extends ((arg: any) => arg is infer R) ? R : never;
 interface PreInitPluginApiUtils {
   callback: typeof callback_d_exports;
@@ -511,9 +454,9 @@ interface PreInitPluginApiUtils {
   promise: typeof promise_d_exports;
   proxy: typeof proxy_d_exports;
   tree: typeof tree_d_exports;
+  react: typeof react_d_exports;
 }
 interface PluginApiUtils extends PreInitPluginApiUtils {
-  react: typeof react_d_exports;
   discord: typeof discord_d_exports;
 }
 declare module '@revenge-mod/plugins/types' {
@@ -534,29 +477,30 @@ declare module '@revenge-mod/plugins/types' {
 declare namespace Metro {
   type DependencyMap = Array<ModuleID>;
   type FactoryFn = (global: object, require: RequireFn, metroImportDefault: RequireFn, metroImportAll: RequireFn, moduleObject: Module, exports: ModuleExports, dependencyMap: DependencyMap) => void;
+  type RegisterSegmentFn = (segmentId: number, moduleDefiner: (moduleId: ModuleID) => void, moduleIds?: ReadonlyArray<ModuleID> | null) => void;
   type ModuleID = number;
   interface ModuleDefinition<Initialized = boolean> {
     /**
-             * Dependencies of this module (set to `undefined` once the module is initialized)
-             */
+     * Dependencies of this module (set to `undefined` once the module is initialized)
+     */
     dependencyMap: If<Initialized, undefined, DependencyMap>;
     /**
-             * Error that occurred during initialization
-             */
+     * Error that occurred during initialization
+     */
     error?: any;
     /**
-             * Factory function that initializes the module
-             */
+     * Factory function that initializes the module
+     */
     factory: If<Initialized, undefined, FactoryFn>;
     /**
-             * Whether an error occurred during initialization
-             */
+     * Whether an error occurred during initialization
+     */
     hasError: boolean;
     importedAll: ModuleExports;
     importedDefault: ModuleExports;
     /**
-             * Whether factory has been successfully called
-             * */
+     * Whether factory has been successfully called
+     * */
     isInitialized: boolean;
     publicModule: Module;
   }

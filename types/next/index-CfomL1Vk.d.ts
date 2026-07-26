@@ -1,14 +1,10 @@
-import { n as Metro } from "./types-Ct0e6YQc.js";
-import * as react4 from "react";
-import * as react_native0 from "react-native";
-import * as react_jsx_runtime0 from "react/jsx-runtime";
-
+import { n as Metro } from "./types-aeIN6rX0.js";
 //#region lib/react/src/index.d.ts
 declare let ReactModuleId: Metro.ModuleID;
 declare let ReactNativeModuleId: Metro.ModuleID;
 declare let ReactJSXRuntimeModuleId: Metro.ModuleID;
-declare let React: typeof react4;
-declare let ReactNative: typeof react_native0;
-declare let ReactJSXRuntime: typeof react_jsx_runtime0;
+declare let React: typeof import('react');
+declare let ReactNative: typeof import('react-native');
+declare let ReactJSXRuntime: typeof import('react/jsx-runtime');
 //#endregion
 export { ReactNative as a, ReactModuleId as i, ReactJSXRuntime as n, ReactNativeModuleId as o, ReactJSXRuntimeModuleId as r, React as t };

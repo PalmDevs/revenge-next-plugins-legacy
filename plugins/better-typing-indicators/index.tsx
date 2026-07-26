@@ -7,15 +7,14 @@ import {
     withProps,
 } from '@revenge-mod/modules/finders/filters'
 import { after, instead } from '@revenge-mod/patcher'
-import { registerPlugin } from '@revenge-mod/plugins/_'
-import { PluginFlags } from '@revenge-mod/plugins/constants'
+import { PluginFlags, registerInternalPlugin } from '@revenge-mod/plugins/_'
 import { isProxy } from '@revenge-mod/utils/proxy'
 import { findInReactFiber } from '@revenge-mod/utils/react'
 import { Image, Pressable, StyleSheet, View } from 'react-native'
 import { SettingsComponent } from './settings'
 import type { AssetId } from '@revenge-mod/assets/types'
 import type { DiscordModules } from '@revenge-mod/discord/types'
-import type { Storage } from '@revenge-mod/storage'
+import type { JsonStorage } from '@revenge-mod/json-storage'
 import type { ComponentProps, FC, ReactElement, ReactNode } from 'react'
 
 export enum DataSource {
@@ -42,8 +41,8 @@ export interface Settings {
     }
 }
 
-registerPlugin<{
-    storage: Settings
+registerInternalPlugin<{
+    jsonStorage: Settings
 }>(
     {
         id: 'palmdevs.better-typing-indicators',
@@ -54,10 +53,12 @@ registerPlugin<{
         icon: 'SuperReactionIcon',
     },
     {
-        start({ cleanup, plugin, storage }) {
+        start({ cleanup, plugin, jsonStorage }) {
             // Discord caches rendered components, so we need to reload to apply the patch properly.
-            if (plugin.flags & PluginFlags.EnabledLate)
-                plugin.flags |= PluginFlags.ReloadRequired
+            if (plugin.startedLate) {
+                plugin.requireReload()
+                return
+            }
 
             cleanup(
                 getModules(
@@ -66,7 +67,7 @@ registerPlugin<{
                         cleanup(
                             patchTypingIndicator(
                                 TypingIndicatorModule as { default: FC },
-                                storage,
+                                jsonStorage,
                             ),
                         )
                     },
@@ -98,9 +99,9 @@ registerPlugin<{
         },
         stop({ plugin }) {
             // We could force a re-render, but you aren't going to be constantly enabling and disabling this plugin anyways.
-            plugin.flags |= PluginFlags.ReloadRequired
+            plugin.requireReload()
         },
-        storage: {
+        jsonStorage: {
             default: {
                 avatar: DataSource.Guild,
                 name: DataSource.Guild,
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
 
 function patchChannelInfo(
     ChannelInfoModule: { default: FC },
-    storage: Storage<Settings>,
+    storage: JsonStorage<Settings>,
 ) {
     return instead(ChannelInfoModule, 'default', function (args, orig) {
         // console.log(args)
@@ -151,7 +152,7 @@ function patchThreadChannel(
     module: {
         ThreadChannel: ThreadChannelComponent
     },
-    storage: Storage<Settings>,
+    storage: JsonStorage<Settings>,
 ) {
     return after(module, 'ThreadChannel', tree => {
         // console.log(tree)
@@ -161,7 +162,7 @@ function patchThreadChannel(
 
 function patchTypingIndicator(
     TypingIndicatorModule: { default: FC },
-    storage: Storage<Settings>,
+    storage: JsonStorage<Settings>,
 ) {
     return after(TypingIndicatorModule, 'default', result => {
         const tree = result as ReactElement<TypingIndicatorTreeProps>
@@ -194,7 +195,7 @@ function patchTypingIndicator(
 function patchTypingView(
     tree: ReactElement,
     { typingUserIds, channel }: RenderTypingIndicatorProps,
-    storage: Storage<Settings>,
+    storage: JsonStorage<Settings>,
 ) {
     const { id: channelId, guild_id: guildId } = channel
 

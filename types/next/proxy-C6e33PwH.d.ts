@@ -26,21 +26,21 @@ declare function isProxified(obj: object): boolean;
 declare function getProxyTarget(obj: object): object | undefined;
 interface ProxifyOptions {
   /**
-       * The hint for the proxified value.
-       *
-       * @default function () {}
-       */
+   * The hint for the proxified value.
+   *
+   * @default function () {}
+   */
   hint?: object;
   /**
-       * Whether the proxified value should be cached.
-       */
+   * Whether the proxified value should be cached.
+   */
   cache?: boolean;
   /**
-       * For methods of the proxified value, whether to bind the `this` context to the proxified value.
-       * The original reference of this method will NOT be retained. To get the original method, use `getProxyTarget` on the method.
-       *
-       * @default false
-       */
+   * For methods of the proxified value, whether to bind the `this` context to the proxified value.
+   * The original reference of this method will NOT be retained. To get the original method, use `getProxyTarget` on the method.
+   *
+   * @default false
+   */
   bindMethods?: boolean;
 }
 /**
@@ -95,8 +95,8 @@ declare function proxify<T>(signal: () => T, options?: ProxifyOptions): T;
  * ```
  */
 declare function unproxify<T extends object>(proxified: T): T;
-type DestructureOptions<T extends object> = { [K in keyof T]?: ProxifyOptions };
-type DestructureResult<T extends object> = { [K in keyof T]: T[K] };
+type DestructureOptions<T extends object> = { [K in keyof T]?: ProxifyOptions; };
+type DestructureResult<T extends object> = { [K in keyof T]: T[K]; };
 /**
  * Destructure a proxified value.
  *

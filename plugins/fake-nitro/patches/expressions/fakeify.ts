@@ -66,9 +66,7 @@ function patchEmojiPicker({
                 )
 
             if (!EmojiConstants) {
-                plugin.errors.push(
-                    new Error('Failed to find EmojiConstants module'),
-                )
+                plugin.reportError('Failed to find EmojiConstants module')
                 plugin.disable()
                 return
             }
@@ -128,7 +126,7 @@ function patchEmojiPicker({
 
 function patchSendAndEditMessages({
     cleanup,
-    storage,
+    jsonStorage: storage,
 }: FakeNitroPluginContext) {
     cleanup(
         getModules(
@@ -312,7 +310,7 @@ function patchSendAndEditMessages({
                                                 sticker.guild_id ===
                                                     channel?.guild_id))
                                     )
-                                        return
+                                        return undefined
 
                                     const link = buildStickerUrl(
                                         sticker,

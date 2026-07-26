@@ -1,10 +1,7 @@
-import "../../react-navigation-B-L1yoaO.js";
-import "../../index-NLeEsMBb.js";
 import FormSwitch from "./FormSwitch.js";
 import Page from "./Page.js";
 import SearchInput from "./SearchInput.js";
 import TableRowAssetIcon from "./TableRowAssetIcon.js";
-
 //#region lib/components/src/types.d.ts
 interface PluginApiComponents {
   FormSwitch: typeof FormSwitch;

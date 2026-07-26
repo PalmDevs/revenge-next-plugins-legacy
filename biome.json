@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
   "assist": {
     "actions": {
       "source": {
@@ -18,7 +18,11 @@
     "enabled": true
   },
   "files": {
-    "includes": ["plugins/**/*", "types/*"],
+    "includes": [
+      "plugins/**/*",
+      "types/*",
+      "lib/**/*"
+    ],
     "ignoreUnknown": true
   },
   "formatter": {
@@ -64,7 +68,7 @@
           "level": "warn"
         }
       },
-      "recommended": true,
+      "preset": "recommended",
       "style": {
         "noNonNullAssertion": {
           "level": "off"

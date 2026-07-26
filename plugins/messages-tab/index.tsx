@@ -13,8 +13,7 @@ import {
     withProps,
 } from '@revenge-mod/modules/finders/filters'
 import { after, before, instead } from '@revenge-mod/patcher'
-import { registerPlugin } from '@revenge-mod/plugins/_'
-import { PluginFlags } from '@revenge-mod/plugins/constants'
+import { registerInternalPlugin } from '@revenge-mod/plugins/_'
 import { afterJSX } from '@revenge-mod/react/jsx-runtime'
 import { proxify } from '@revenge-mod/utils/proxy'
 import { findInReactFiber } from '@revenge-mod/utils/react'
@@ -51,7 +50,7 @@ type RouterUtils = {
     transitionToGuild: (guildId: string) => void
 }
 
-registerPlugin(
+registerInternalPlugin(
     {
         name: 'Messages Tab',
         author: 'Palm',
@@ -95,7 +94,7 @@ registerPlugin(
             )
         },
         stop({ plugin }) {
-            plugin.flags |= PluginFlags.ReloadRequired
+            plugin.requireReload()
         },
     },
     0,
